@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.nottingham.uav.mapper.TeamMapper">
+
+	<resultMap id="TeamEntityMap"
+		type="cn.nottingham.uav.entity.Team">
+		<id column="team_id" property="teamId"	/>
+		<id column="uav_id" property="uavId"	/>
+		<result column="team_name" property="teamName"	/>
+		<result column="owner" property="owner"/>		
+		<result column="max_member_number" property="maxMemberNumber"	/>
+		<result column="flight_area" property="flightArea"/>
+		<result column="is_private" property="isPrivate"/>
+		<result column="is_delete" property="isDelete"/>
+		<result column="created_user" property="createdUser"/>
+		<result column="modified_time" property="modifiedTime"/>
+		<result column="created_time" property="createdTime"/>
+		<result column="modified_time" property="modifiedTime"/>
+	</resultMap>
+	<!-- establish team -->
+	<!-- Integer establishTeam (Team team) -->
+	<insert id="establishTeam"
+		useGeneratedKeys="true"
+		keyProperty="teamId">
+		INSERT INTO t_team (
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete,
+			created_user,created_time,
+			modified_user,modified_time
+		) VALUES (
+			#{teamId},#{teamName},
+			#{owner},#{uavId},
+			#{flightArea},#{maxMemberNumber},
+			#{isPrivate},#{isDelete},
+			#{createdUser},#{createdTime},
+			#{modifiedUser},#{modifiedTime}
+		)
+	</insert>
+	
+	<!-- select team by owner -->
+	<!-- Team findTeambyOwner(String owner) -->
+	<select id="findTeamByOwner"
+		resultMap="TeamEntityMap">
+		SELECT
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete,
+			created_user,created_time,
+			modified_user,modified_time
+		FROM
+			t_team
+		WHERE 
+			owner=#{owner}
+	</select>
+	
+	<!-- select team by teamId -->
+	<!-- Team findTeamByTeamId(Integer teamId) -->
+	<select id="findTeamByTeamId"
+		resultMap="TeamEntityMap">
+		SELECT
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete,
+			created_user,created_time,
+			modified_user,modified_time
+		FROM
+			t_team
+		WHERE 
+			team_id=#{teamId}
+	</select>
+	
+	<!-- update team information -->
+	<!-- Integer updateTeam(Team team) -->
+	<update id="updateTeam">
+		UPDATE
+			t_team
+		SET
+			team_name=#{teamName},
+        	owner=#{owner},
+        	uav_id=#{uavId},
+        	flight_area=#{flightArea},
+        	max_member_number=#{maxMemberNumber},
+        	is_private=#{isPrivate},
+        	is_delete=#{isDelete},
+        	modified_user=#{modifiedUser}, 
+        	modified_time=#{modifiedTime} 
+		WHERE
+			team_id=#{teamId}
+	</update>
+	
+	<!-- List<Team> findTeamsByUavId(Integer uavId,String condition,String order); -->
+	<select id="findTeamsByUavId"
+		resultMap="TeamEntityMap">
+		SELECT
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete
+		FROM
+			t_team t
+		WHERE 
+			max_member_number > (SELECT COUNT(*) FROM t_user AS u where u.team_id = t.team_id)
+		AND
+			uav_id=#{uavId}
+		ORDER BY 
+			${condition} ${order},
+			convert(team_name using gbk)collate gbk_chinese_ci asc;
+	</select>
+	
+	<!-- List<Team> findTeamsByCondition(String condition,String order); -->
+	<select id="findTeamsByCondition"
+		resultMap="TeamEntityMap">
+		SELECT
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete
+		FROM
+			t_team t
+		WHERE  
+			max_member_number > (SELECT COUNT(*) FROM t_user AS u where u.team_id = t.team_id)
+		ORDER BY 
+			${condition} ${order},
+			convert(team_name using gbk)collate gbk_chinese_ci asc;
+	</select>
+	
+	<!-- List<Team> findTeamsByTeamName(String teamName); -->
+	<select id="findTeamsByTeamName"
+		resultMap="TeamEntityMap">
+		SELECT
+			team_id,team_name,
+			owner,uav_id,
+			flight_area,max_member_number,
+			is_private,is_delete
+		FROM
+			t_team t
+		WHERE  
+			max_member_number > (SELECT COUNT(*) FROM t_user AS u where u.team_id = t.team_id)
+		AND
+			team_name like "${condition}%"
+			
+	</select>
+	
+	<!-- Integer deleteTeam(Integer teamId); -->
+	<delete id="deleteTeam">
+		DELETE FROM
+			t_team
+		WHERE
+			team_Id=${teamId}
+	</delete>
+</mapper>
+
+
+
+
+
+

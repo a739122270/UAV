@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+<meta charset="UTF-8">
+<title>Direct Messaging</title>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="jQuery插件库(www.jq22.com)">
+<meta name="weburl" content="http://www.jq22.com/">
+
+<link rel="stylesheet" href="/stylesheets/reset.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<link href="https://cdn.bootcss.com/sco.js/1.1.0/css/scojs.css" rel="stylesheet">
+<script type='text/javascript' src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script type='text/javascript' src="https://cdn.bootcss.com/sco.js/1.1.0/js/sco.message.js"></script>
+<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.qqFace.js"></script>
+
+<style>
+.qqFace { margin-top: -140px; background: #fff; padding: -2px; border: 1px #dfe6f6 solid; }
+.qqFace table td { padding: 0px; }
+.qqFace table td img { cursor: pointer; border: 1px #fff solid; }
+.qqFace table td img:hover { border: 1px #0066cc solid; }
+</style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="container">
+        <div class="left">
+            <div class="top">
+                <input type="text" placeholder="Search" />
+                <a href="javascript:;" class="search"></a>
+            </div>
+            <ul class="people" id="personList">
+
+            </ul>
+        </div>
+        <div class="right">
+            <div class="top">
+                <span>To: <span class="name">Dog Woofson</span></span>
+                <span style="float: right;">From: <span class="my-name"></span></span>
+            </div>
+
+            <div class="bottom"></div>
+            <div class="write">
+                <a href="javascript:;" class="write-link attach"></a>
+                <input id="msg" name="msg" type="text" />
+                <a href="javascript:;" class="write-link smiley emotion"></a>
+                <a href="javascript:;" id = "btn-send" class="write-link send"></a>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  
+
+<script type="text/javascript">
+
+    var name;
+    var image;
+    var dataObj;
+
+    /**** Gets the current user information *****/
+    $.ajax({
+        "url" : "http://localhost:8080/users/get_user_jsonp",
+        "type" : "get",
+        "dataType" : "jsonp",
+        "jsonp": "callbackName",// Backend interface parameter name
+        "jsonpCallback" : "callbackFunction", // The name of the callback function
+        success:function(res){
+            console.log(res);
+        }
+    });
+
+    var callbackFunction = function(data) {
+        var json = JSON.parse(JSON.stringify(data));
+        name = json.username;
+        image = "http://localhost:8080"+json.avatar;
+
+        $('.my-name').html(name);
+        $(".my-avatar").attr("src",image);
+        
+        dataObj = {
+            name:name,
+            image:image
+        };
+    
+
+
+        $(function () {
+
+            var userSelf;
+            var toUser;
+            var userBefore;
+
+            var time;
+            var now;
+
+            var socket = io();
+
+            socket.emit('login',dataObj);
+            $('#msg').focus();
+
+            socket.on('userObj',function(user){
+                userSelf = user;
+            });
+
+
+            function writeCurrentDate(now) {
+
+                var year = now.getFullYear(); //get yera
+                var month = now.getMonth();//get month
+                var date = now.getDate();//get date
+                var day = now.getDay();//get weeks
+                var hour = now.getHours();//get hour
+                var minu = now.getMinutes();//get minute
+                var sec = now.getSeconds();//get second
+ 　　           var MS = now.getMilliseconds();//get ms
+                var week;
+                month = month + 1;
+                if (month < 10) month = "0" + month;
+                if (date < 10) date = "0" + date;
+                if (hour < 10) hour = "0" + hour;
+                if (minu < 10) minu = "0" + minu;
+                if (sec < 10) sec = "0" + sec;
+
+                time = "Today, " + hour + ":" + minu;
+
+            }
+
+            //Add a user to join the room
+            socket.on('addUser',function(user){
+                //$("#personList").empty();
+                //$(".chat").remove();
+                var li =   "<li class='person' data-chat='#{value}' socket-id='#{id}' img-src='#{src}''>"+
+                                    '<img src="#{image}" alt="" />'+
+                                    '<span class="name" >#{name}</span>'+
+                                    '<span class="time">#{time}</span>'+
+                                    '<span class="preview">Hello, I am #{intro}</span>'+
+                                '</li>';
+
+                now = new Date(); 
+                writeCurrentDate(now);
+                li = li.replace("#{image}",user.image);
+                li = li.replace("#{src}",user.image);
+                li = li.replace("#{value}",user.name);
+                li = li.replace("#{id}",user.id);
+                li = li.replace("#{intro}",user.name);
+                li = li.replace("#{time}",time);
+                if(user.name == name){
+                    var newName = user.name + " (myself)";
+                    li = li.replace("#{name}",newName);
+                }else{
+                    li = li.replace("#{name}",user.name);
+                }
+
+                $("#personList").append(li);
+
+                var div =  '<div class="chat" data-chat="#{value}">'+
+                            '</div>';  
+
+                div = div.replace("#{value}",user.name);  
+                $(".top").after(div);            
+            });
+
+
+
+            //Displays a list of currently joined room members and a list of messages
+            socket.on('userList',function(userList){
+
+                for(var i=0; i<userList.length; i++){
+
+                    var li =   "<li class='person' data-chat='#{value}' socket-id='#{id}' img-src='#{src}''>"+
+                                    '<img src="#{image}" alt="" />'+
+                                    '<span class="name" >#{name}</span>'+
+                                    '<span class="time">#{time}</span>'+
+                                    '<span class="preview">Hello, I am #{intro}</span>'+
+                                '</li>';
+                    now = new Date(); 
+                    writeCurrentDate(now);
+
+                    li = li.replace("#{image}",userList[i].image);
+                    li = li.replace("#{src}",userList[i].image);
+                    li = li.replace("#{value}",userList[i].name);
+                    li = li.replace("#{id}",userList[i].id);
+                    li = li.replace("#{intro}",userList[i].name);
+                    li = li.replace("#{time}",time);
+
+                    if(userList[i].name == name){
+                        var newName = userList[i].name + " (myself)";
+                        li = li.replace("#{name}",newName);
+                        toUser = {
+                            id : userList[i].id,
+                            name : userList[i].name,
+                            image : userList[i].image
+                        };
+                    }else{
+                        li = li.replace("#{name}",userList[i].name);
+                    }
+
+                    $("#personList").append(li);
+
+                    var div =  '<div class="chat" data-chat="#{value}">'+
+                                '</div>';  
+
+                    div = div.replace("#{value}",userList[i].name);  
+                    $(".top").after(div);
+                }
+
+                document.querySelector('.container .left .people .person[data-chat='+name+']').classList.add('active');
+                document.querySelector('.container .right .top .name').innerText = name;
+                document.querySelector('.container .right').querySelector('.chat[data-chat='+name+']').classList.add('active-chat');
+
+            });
+
+            //Delete the user that exits the room
+            socket.on('deleteUser',function(user){
+                $('.container .right .chat[data-chat='+user.name+']').remove();
+                $('.container .left .people .person[data-chat='+user.name+']').remove();
+            });
+
+            
+            $(document).on("click",".person",function(){
+
+                $('.person').removeClass("active");
+                $(this).addClass('active');
+
+                var temp = $(this).attr("data-chat");
+                var toImage = $(this).attr("img-src");
+
+                document.querySelector('.container .right .top .name').innerText = temp;
+
+                $('.chat').removeClass("active-chat");
+                document.querySelector('.container .right').querySelector('.chat[data-chat='+temp+']').classList.add('active-chat');
+
+                var socketId = $(this).attr("socket-id");
+
+                toUser = {
+                    id : socketId,
+                    name : temp,
+                    image : toImage,
+                };
+            });
+
+
+            document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];  
+                if(e && e.keyCode==13){ 
+                    $("#btn-send").click();
+                }
+            }; 
+
+
+
+            $('.emotion').click(function(e){
+
+                $('.emotion').qqFace({
+
+                    id : 'facebox', 
+
+                    assign:'msg', 
+
+                    path:'/arclist/' //The path of expression storage
+
+                });
+
+            });
+
+
+            function replace_em(str){
+                str = str.replace(/\[em_([0-9]*)\]/g,'<img style="margin:0px; width:25px;height:25px;" src="arclist/$1.gif" border="0" />');
+                return str;
+            }
+
+
+
+            $("#btn-send").click(function(e){  
+
+                e.preventDefault(); //prevents page reloading
+
+                if(!$('#msg').val()){
+                    return false;
+                }
+
+                var msgObj ={
+                    from : userSelf, //img id name
+                    to : toUser,
+                    msg : replace_em($("#msg").val())
+                }
+
+                socket.emit('sendToOne', msgObj);
+                $('#msg').val('');
+                return false;
+
+            });
+            
+
+
+            socket.on('toOne', function(msgObj){
+
+                if(!$('.container .right .chat[data-chat='+msgObj.from.name+'] .conversation-start').length>0){
+                    now = new Date(); 
+                    writeCurrentDate(now);
+                    var timeDiv = '<div class="conversation-start">'+
+                                    '<span>#{time}</span>'+
+                                '</div>';
+                     timeDiv = timeDiv.replace("#{time}",time);
+                     $('.container .right .chat[data-chat='+msgObj.from.name+']').append(timeDiv);
+                     userBefore = msgObj.to.name;
+                }
+
+                var endTime = new Date(); // end time
+                var timeInterval = (endTime - now)/ (60 * 1000); // Number of minutes
+
+                if(timeInterval >= 5){
+                    writeCurrentDate(now);
+                    var timeDiv = '<div class="conversation-start">'+
+                                    '<span>#{time}</span>'+
+                                '</div>';
+                     timeDiv = timeDiv.replace("#{time}",time);
+                     $('.container .right .chat[data-chat='+msgObj.from.name+']').append(timeDiv);
+                }
+
+                //The message source is shown on the left
+                writeCurrentDate(endTime);
+
+                var msgDisplay = msgObj.msg;    //The string to display
+                if(msgObj.msg.length>8){
+                    msgDisplay=msgObj.msg.substring(0,8)+"...";
+                }
+                document.querySelector('.container .left .people .person[data-chat='+msgObj.from.name+'] .preview').innerHTML = msgDisplay;
+                document.querySelector('.container .left .people .person[data-chat='+msgObj.from.name+'] .time').innerHTML = time;
+
+
+                var div = '<div class="from">'+
+                            '<img src="#{image}" alt="" />'+
+                            '<div class="bubble you">'+
+                                '#{msg}'+
+                            '</div>'+
+                        '</div>';
+
+                div = div.replace("#{image}",msgObj.from.image); 
+                div = div.replace("#{msg}",msgObj.msg); 
+
+                $('.container .right .chat[data-chat='+msgObj.from.name+']').append(div);
+            });
+
+
+            socket.on('fromMe', function(msgObj){
+
+                if(!$('.container .right .chat[data-chat='+msgObj.to.name+'] .conversation-start').length>0){
+                    now = new Date(); 
+                    writeCurrentDate(now);
+                    var timeDiv = '<div class="conversation-start">'+
+                                    '<span>#{time}</span>'+
+                                '</div>';
+                     timeDiv = timeDiv.replace("#{time}",time);
+                     $('.container .right .chat[data-chat='+msgObj.to.name+']').append(timeDiv);
+                     userBefore = msgObj.to.name;
+                }
+
+                var endTime = new Date(); // end time
+                var timeInterval = (endTime - now)/ (60 * 1000);
+
+                if(timeInterval >= 5){
+                    writeCurrentDate(now);
+                    var timeDiv = '<div class="conversation-start">'+
+                                    '<span>#{time}</span>'+
+                                '</div>';
+                     timeDiv = timeDiv.replace("#{time}",time);
+                     $('.container .right .chat[data-chat='+msgObj.to.name+']').append(timeDiv);
+                     userBefore = msgObj.to.name;
+                }
+                
+
+                var div = '<div class="to">'+
+                            '<img src="#{image}" alt="" />'+
+                            '<div class="bubble me">'+
+                                '#{msg}'+
+                            '</div>'+
+                        '</div>';
+
+                div = div.replace("#{image}",msgObj.from.image); 
+                div = div.replace("#{msg}",msgObj.msg); 
+
+                $('.container .right .chat[data-chat='+msgObj.to.name+']').append(div);
+            });
+
+            socket.on('online', function(msg){
+                showMsg(1,msg);
+            });
+
+            socket.on('offline', function(msg){
+                showMsg(0,msg);
+            });
+
+        });
+
+        function showMsg(type,msg){
+            if(type == 1){
+                $.scojs_message(msg, $.scojs_message.TYPE_OK);
+            }else{
+                $.scojs_message(msg, $.scojs_message.TYPE_ERROR);
+            }
+        }
+
+    };
+    </script>
+    <script  src="/javascripts/index.js"></script>
+
+
+
+</body>
+
+</html>

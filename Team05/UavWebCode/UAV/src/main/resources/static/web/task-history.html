@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<title>TASK HISTORY - UAV Fleet Management</title>
+<link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ />
+
+<link rel="stylesheet"
+	href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="../assets/css/team-search.css">
+<link rel="stylesheet" href="../assets/css/search-result.css">
+
+
+<script src="../bootstrap3/js/holder.js"></script>
+<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+<script src="../bootstrap3/js/bootstrap.js"></script>
+
+</head>
+
+<body class="pageBackground">
+
+	<nav class="navbar navbar-static-top navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<img src="../images/logo-V4.png" class="navbar-brand"
+					style="transform: scale(1.5)" alt="logo-white" />
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">UFM</a></li>
+					<li><a href="personal-homepage.html">DASHBOARD</a></li>
+					<li><a href="http://localhost:3000">CHAT ROOM</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> FLIGHT TASK<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="task-create.html">Task Creation</a></li>
+							<li><a href="flight.html">Task In Progress</a></li>
+							<li><a href="task-history.html">Task History</a></li>
+						</ul></li>
+					<li class="active dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false"> SEARCH<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="team-search.html">Team Search</a></li>
+							<li><a href="user-search.html">User Search</a></li>
+						</ul></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="login.html">LOG OFF</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<div class="container">
+		<!--the first row: title-->
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-centered">
+				<h1 style="font-weight: 900;">TASK HISTORY</h1>
+				<p>
+					Unmanned Aerial Vehicle <br> Fleet Managment
+				</p>
+				<div class="col-md-6 col-centered row-centered"></div>
+			</div>
+		</div>
+
+		<!--hr class="featurette-divider"-->
+
+		<div class="team-search-box-body main-content">
+			<div class="team-info">
+				<div class='team-table'>
+					<label class='team-name'>TASK NAME</label> <br>
+					<br>
+
+					<div class="row ">
+
+						<div class="teaminfo-left col-xs-12 col-md-4 ">
+							<table>
+								<tr>
+									<td>UAV TYPE:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td>CAPTAIN:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td>MEMBER AMOUNT:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+							</table>
+						</div>
+						<!--info left-->
+
+						<div class='teaminfo-right col-xs-12 col-md-4'>
+							<table>
+								<tr>
+									<td>TEAM ID:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td>FlIGHT AREA:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td>COMPLETION DATE:</td>
+									<td>&nbsp;&nbsp;</td>
+								</tr>
+							</table>
+							<br>
+						</div>
+						<!--info right-->
+
+						<div class="col-xs-12 col-md-2 " style="margin-top: -20px; ">
+							<br><br>
+							<button class='button-viewmore' type='button'
+								>VIEW MORE</button><br>
+							<button class='button-join' type='button' >DELETE</button>
+						</div>
+						<!--buttons-->
+					</div>
+					<!-- row -->
+					<br> <br>
+
+				</div>
+				<!--team table-->
+
+			</div>
+			<!--team info-->
+		</div>
+		<!--box body-->
+	</div>
+
+	<!-- jQuery -->
+	<script src="../bower_components/jquery/dist/jquery.min.js "></script>
+	<script src="../plugins/iCheck/icheck.min.js "></script>
+	<script>
+		$(".button-viewmore").click(function() {
+			window.location.href = 'task-detail.html';
+		})
+	</script>
+</body>
+
+</html>

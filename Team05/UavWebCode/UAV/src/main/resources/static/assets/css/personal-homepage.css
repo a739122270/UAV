@@ -1,0 +1,104 @@
+.navbar{
+	color:rgb(79, 119, 158);
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+	background-color: white;
+
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    /*background-color:  rgb(210, 226, 241);;*/
+    background-image:none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: rgb(79, 119, 158);
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+
+
+#choose-file{
+	display:none;
+}
+#img-avatar{
+	width:80px; 
+	height:80px; 
+	border-radius:50%; 
+	border:solid 1.5px #FFFFFF
+}
+
+.avatar-button-field{
+	margin-left:120px;
+	padding-top:17px;
+}
+#btn-change-avatar{
+	display:none;
+}
+.members-content{
+	padding:18px; 
+	border-radius:6px;
+	border:solid 1px #FFFFFF;
+	height:240px;
+	overflow-y: auto;
+}
+.tasks-content{
+	padding:18px; 
+	border-radius:6px;
+	border:solid 1px #FFFFFF;
+	height:240px;
+	overflow-y: auto;
+}
+.members-content::-webkit-scrollbar{
+    display: none;
+}
+.tasks-content::-webkit-scrollbar{
+    display: none;
+}
+
+.member-info,.task-info{
+	margin-bottom:20px;
+}
+
+.member-info p{
+	font-family: "Source Sans Pro", sans-serif;
+	color: #ffffff;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+}
+
+.member-info input[type="button"]{
+	width:60px;
+	height:25px; 
+	line-height:12.5px; 
+	font-size:6px; 
+	padding-left:6px;
+	float:right;
+	margin-top:-4px;
+}
+
+
+#btn-add-member,#btn-add-task{
+	width:160px;
+	height:30px; 
+	line-height:15px; 
+	font-size:10px; 
+	padding-left:10px;
+}
+

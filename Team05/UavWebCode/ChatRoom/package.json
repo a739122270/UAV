@@ -1,0 +1,13 @@
+{
+  "name": "socket-chat-example",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.15.2",
+    "http-proxy-middleware": "^1.0.3",
+    "proxy": "^1.0.1",
+    "socket.io": "^2.3.0",
+    "underscore": "^1.9.2"
+  }
+}

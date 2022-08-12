@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <title>FLIGHT STATUS - UAV Fleet Management</title>
+    <link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ /> 
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="../assets/css/flight.css">
+
+
+    <script src="../bootstrap3/js/holder.js"></script>
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=WNmdqACk2mNa0oSeuK9NYPhCO4vAZhn1"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/library/TrackAnimation/src/TrackAnimation_min.js"></script>
+    
+    
+    
+    <script type="text/javascript">
+		function altRows(id){
+		    if(document.getElementsByTagName){ 
+		         
+		        var table = document.getElementById(id); 
+		        var rows = table.getElementsByTagName("tr");
+		          
+		        for(i = 0; i < rows.length; i++){         
+		            if(i % 2 == 0){
+		                rows[i].className = "evenrowcolor";
+		            }else{
+		                rows[i].className = "oddrowcolor";
+		            }     
+		        }
+		    }
+		}
+		 
+		window.onload=function(){
+		    altRows('alternatecolor');
+		}
+	</script>
+ 
+ 
+<script type="text/javascript">
+function altRows(id){
+    if(document.getElementsByTagName){ 
+         
+        var table = document.getElementById(id); 
+        var rows = table.getElementsByTagName("tr");
+          
+        for(i = 0; i < rows.length; i++){         
+            if(i % 2 == 0){
+                rows[i].className = "evenrowcolor";
+            }else{
+                rows[i].className = "oddrowcolor";
+            }     
+        }
+    }
+}
+ 
+window.onload=function(){
+    altRows('alternatecolor');
+}
+</script>
+ 
+<style type="text/css">
+table.altrowstable {
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #E6E6E6;
+    border-collapse: collapse;
+}
+table.altrowstable th {
+	border-width: 1px;
+	font-size: 15px;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #E6E6E6;
+}
+table.altrowstable td {
+	width:100px;
+	font-size: 15px;
+	font-weight:200;
+	text-align:center;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #E6E6E6;
+}
+.oddrowcolor{
+    background-color:white;
+}
+.evenrowcolor{
+    background-color:white;
+}
+</style>
+    
+</head>
+
+<body class="pageBackground">
+    <nav class="navbar navbar-static-top navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <img src="../images/logo-V4.png" class="navbar-brand" style = "transform:scale(1.5)" alt="logo-white" />
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             <ul class="nav navbar-nav">           
+  			    <li><a href="index.html">UFM</a></li> 
+                <li><a href="personal-homepage.html">DASHBOARD</a></li>
+                <li><a href="http://localhost:3000">CHAT ROOM</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    FLIGHT TASK<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="task-create.html">Task Creation</a></li>
+                    <li><a href="flight.html">Task In Progress</a></li>
+                    <li><a href="task-history.html">Task History</a></li>
+                  </ul>
+                </li>
+                <li class="active dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    SEARCH<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="team-search.html">Team Search</a></li>
+                    <li><a href="user-search.html">User Search</a></li>
+                  </ul>
+                </li>
+                
+  		     </ul>
+			   <ul class="nav navbar-nav navbar-right">
+				<li><a href="login.html">LOG OFF</a></li>
+			</ul>
+          </div>
+          
+       </div><!-- /.container-fluid -->
+     </nav>
+
+    <div class="main">
+        <!-- content -->
+        <div class="container-content">
+            <div class="row">
+        
+            <div class="col-md-1"></div>
+            <div class="col-xs-12 col-md-6">
+              <div id="allmap">   
+              </div>
+            </div>   <!-- MAP (left)-->
+
+            <div class="col-md-5">
+            <!-- TASK (right) -->
+            <article class="container-task">
+                <h2 class="underLine">FLIGHT STATUS</h2> 
+                <form class="form-content" action="" method="get">
+                    <div class="fields">                                            
+                        <div class="field div-member">
+                            <label>Members Status</label>
+                            <div style="height:400px; width:500px;">
+                                <table border="1" class="altrowstable" id="alternatecolor">
+                                    <tr>
+                                        <td>Aircraft ID</td>
+                                        <td>Battery</td>
+                                        <td>Latitude</td>
+                                        <td>Longitude</td>
+                                    </tr>                                                                      
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- progress -->
+                    <div style="width:100%;text-align: center;">
+                    	<label style="position:relative;top:25px; margin-left:-40px;font-size:12px;">Current Progress: <span id="current"></span></label>
+                        <progress id="progress" value='90' max='100'></progress>    
+                        
+                    </div>
+
+                    <!-- <input type="button" class="button-viewmore" name="set" id="" value="SET" onClick="setType()"> -->
+                    <input class="btn-complete" type="submit" name="end" value="END TASK" onClick="toEnd()">
+                </form>
+            </article>
+        </div><!--task status-->
+
+        </div><!--row-->
+        </div> <!--container-->
+
+
+        <div id="bg2"></div>
+    </div>
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+           
+    </script>
+    
+    <script type="text/javascript">
+	var websocket = null;
+	
+	var userId=$.cookie("userId");
+	
+	async function establishWebSocket(){
+
+	    if('WebSocket' in window){
+	        websocket = new WebSocket("ws://localhost:8080/websocket/"+ userId + "_web");
+	    }
+	    else{
+	        alert('Not support websocket')
+	    }
+	    
+	    await new Promise((resolve) =>{
+	    	websocket.onopen = function(e){
+	    		resolve(e.data);
+	    	};
+	    });
+	}
+	
+	establishWebSocket();
+
+    websocket.onerror = function(){
+        //setMessage("connect error");
+    };
+
+    websocket.onopen = function(event){
+        //setMessage("open");
+    }
+
+    websocket.onmessage = function(event){
+        setMessage(event.data);
+    }
+
+    websocket.onclose = function(){
+        //setMessage("close");
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+    
+    var aircraftList = [];
+    var count = 0;
+    var flight=0;
+    var bmap = new BMapGL.Map("allmap");    // generate Map instance
+    var times = 0;
+    var point = [];
+    var trackAni;
+    function setMessage(message){
+    	if(message.indexOf(";") != -1 && !isNaN(message.substr(0, 1))){
+    		var s =[];
+        	s = message.split(";");
+	    	switch(s[0]){
+	    		case("1"):
+	            	var result = confirm(s[s.length-1]); 
+	            	websocket.send(message+";"+result);	            		            	
+	            	
+	    		case("4"):
+	    			$("."+s[2]).show(); 
+	    			$.cookie("joinedMember"+s[2], s[2], {
+                    	"expires": 7
+                	});
+	    		case("5"):
+	    			flag=0;
+	    		    for(var i=0;i<Number(s[s.length-1]);i++){
+	    		    	if(aircraftList[i] == s[4]){
+	    		    		flag=1;
+	    		    		break;
+	    		    	}
+	    		    }
+	    			if(flag==0){
+	    				var tr = "<tr class='aircraft-#{ID}'>"+
+            						"<td class='id'>#{id}</td>"+
+            						"<td class='battery'>#{battery}</td>"+
+            						"<td class='latitude'>#{latitude}</td>"+
+            						"<td class='longitude'>#{longitude}</td>"+
+        						"</tr>";
+        				tr = tr.replace("#{ID}",s[4]);	
+        				tr = tr.replace("#{id}",s[4]);	
+        				tr = tr.replace("#{battery}", s[5]);	
+        				tr = tr.replace("#{latitude}", s[6].substr(0, 9));	
+        				tr = tr.replace("#{longitude}", s[7].substr(0, 9));	
+        				$(".altrowstable").append(tr);	
+        				
+        				aircraftList[count]=s[4];
+        				count++;
+	    			}else{
+	    				$('.aircraft-'+s[4]+ ' .battery').text(s[5]);
+	    				$('.aircraft-'+s[4]+ ' .latitude').text(s[6].substr(0, 9));
+	    				$('.aircraft-'+s[4]+ ' .longitude').text(s[7].substr(0, 9));
+	    			}
+	    			
+	    			$("#progress").attr("value",s[3]);
+	    			$("#current").text(s[3]+"%");	    		
+	    			
+	    			if(times == 0){
+	    				bmap.centerAndZoom(new BMapGL.Point(Number(s[7]),Number(s[6])), 17);  // Initialize the map, set the center coordinates and map levels	    			
+		    		    bmap.enableScrollWheelZoom(true);    
+		    		    point.push(new BMapGL.Point(Number(s[7]),Number(s[6])));
+		    		    times++;
+	    			}else if(times == 1){	    				
+	    				point.push(new BMapGL.Point(Number(s[7]),Number(s[6])));
+	    				setTimeout('start()', 50);
+	    				times++;
+	    			}else{
+	    				trackAni.cancel();	
+	    				point.shift();
+	    				point.push(new BMapGL.Point(Number(s[7]),Number(s[6])));
+	    				setTimeout('start()', 50);
+	    			}
+	    				    		    	    		       			
+	    			
+    		}   		
+    	}else{
+    		alert(message);
+    	}
+    }
+
+    function closeWebSocket(){
+        websocket.close();
+    }
+    
+    function start () {
+			var pl = new BMapGL.Polyline(point);
+			trackAni = new BMapGLLib.TrackAnimation(bmap, pl, {
+            overallView: false,
+            tilt: -3,
+            duration: 1000,
+            delay: 0
+        });
+        trackAni.start();	    		            	    		          	    		          
+ }
+    
+          
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<title>USER SEARCH - UAV Fleet Management</title>
+<link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ />
+
+<link rel="stylesheet"
+	href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="../assets/css/search-result.css">
+<link rel="stylesheet" href="../assets/css/team-search.css">
+
+
+<script src="../bootstrap3/js/holder.js"></script>
+<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+<script src="../bootstrap3/js/bootstrap.js"></script>
+</head>
+
+<body class="pageBackground">
+
+	<nav class="navbar navbar-static-top navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<img src="../images/logo-V4.png" class="navbar-brand"
+					style="transform: scale(1.5)" alt="logo-white" />
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">INDEX</a></li>
+					<li><a href="personal-homepage.html">DASHBOARD</a></li>
+					<li><a href="http://localhost:3000">CHAT ROOM</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> FLIGHT TASK<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="task-create.html">Task Creation</a></li>
+							<li><a href="flight.html">Task In Progress</a></li>
+							<li><a href="task-history.html">Task History</a></li>
+						</ul></li>
+					<li class="active dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false"> SEARCH<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="team-search.html">Team Search</a></li>
+							<li><a href="user-search.html">User Search</a></li>
+						</ul></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="login.html">LOG OFF</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<div class="container">
+
+		<!--the first row: title-->
+		<div class="row">
+			<div class="col-xs-12 col-md-4 col-centered">
+
+				<h1 style="font-weight: 900;">
+                  SEARCH FOR <br> A USER
+        </h1>
+  
+      <div class="col-md-8" style="float:right;"> 
+        <form id="form-team-search-condition">
+
+          <h3 style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3> <br>
+
+          <table>
+            <tr>
+              <td style="float: right;">ORDER BY ALPHABE</td>
+              <td style="width: 70px;"><label style="margin-left: -80px;"><input
+              name="search-condition" type="radio" value="distance" checked />
+              </label> </td>
+            </tr>
+            <tr>
+              <td>DESC</td>
+              <td style="width: 70px;"><label><input name="search-order" type="radio" value="DESC" checked/></label></td>
+            </tr> 
+            <tr>
+              <td>ASC </td>
+              <td style="width: 70px;"><label> <input name="search-order" type="radio" value="ASC" /></label></td>
+            </tr>                              
+          </table>               
+            <br><br>
+            <input class="btn-search-team" type="button" value="Search">  
+        </form>
+      
+      </div>
+			</div>
+		</div>
+
+
+		<div class="team-search-box-body main-content" style = "margin-top:50px;">
+			<div class="team-info"></div>			
+		</div>
+
+
+	</div>
+	<!--search body-->
+
+
+	<div id="bg2"></div>
+
+	<!-- jQuery -->
+	<script src="../bower_components/jquery/dist/jquery.min.js "></script>
+	<script src="../plugins/iCheck/icheck.min.js "></script>
+	<script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+	<!-- /.jQuery -->
+
+	<!-- AJAX -->
+	<script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script type="text/javascript">
+    </script>
+	<script type="text/javascript">
+	
+	
+	var order = $('input[name="search-order"]:checked').val();
+	$.ajax({
+	    "url":"/users/search_users_by_alphabet",
+		"data":"order="+order,
+		"type":"get",
+		"dataType":"json",
+		"success":function(json) {
+			if(json.state == 20){ 	  				
+				displayUserInfo(json.data)
+			}
+		}
+	});
+	
+	
+    
+    /****  team search ajax  ****/
+    $(".btn-search-team").click(function(){
+    	var order = $('input[name="search-order"]:checked').val();
+    	$.ajax({
+    	    "url":"/users/search_users_by_alphabet",
+    		"data":"order="+order,
+    		"type":"get",
+    		"dataType":"json",
+    		"success":function(json) {
+    			if(json.state == 20){ 	  				
+    				displayUserInfo(json.data)
+    			}
+    		}
+    	});
+    });
+    
+    //获取个人信息
+    var teamId;
+    var userId;
+	$.ajax({
+		"url" : "/users/get_by_userId",
+		"data":null,
+		"type" : "get",
+		"async":false,
+		"dataType" :"json",
+		"success" : function(json) {
+			if (json.state == 20) {
+				teamId = ( json.data.teamId==undefined? "NULL": json.data.teamId);
+				userId = json.data.userId;
+			} else {
+				alert(json.message);
+			}
+		}
+	});
+    
+    function displayUserInfo(list){
+    	$(".team-table").remove();
+		$(".no-record-head").remove();
+    	if(list == null){
+			var div="<div class='team-table' id='h4'><br><br>"+
+						"<div class='row'>"+
+						"<div class='teaminfo-left col-xs-12 col-md-4 '>"+
+						"<table><tr><th> No relevant record. </th></tr></table></div>"+       
+						"<div class='teaminfo-right col-xs-12 col-md-4'></div>"+  
+						"<div class='col-xs-12 col-md-4' style='float:right;'><br><br><br></div>"+
+						"</div>     <!--row-->     </div>";
+			$(".team-info").append(div);
+		}else{
+			for(var i=0;i<list.length;i++){
+				if( Number(list[i].userId) != Number(userId)){			
+					var div ="<div style='margin-bottom:40px' class='team-table'>"+
+								"<div class= 'row'>"+
+									"<br>"+
+									"<label class='user-name' style='padding-left:15px;'>#{username}</label>"+
+									
+									"<br>"+
+				        			"<div class='teaminfo-left col-xs-12 col-md-4'>"+
+				        				"<table>"+
+				            				"<tr>"+
+				              					"<td>TEAM ID: </td>"+
+				              					"<td>&nbsp;&nbsp;#{teamId}</td>"+
+				            				"</tr>"+
+				            				"<tr>"+
+				              					"<td>UAV TYPE</td>"+
+				              					"<td>&nbsp;&nbsp;#{uavType}</td>"+
+				            				"</tr>"+
+				            			"</table>"+ 
+				            		"</div>"+  
+				            		"<div class='teaminfo-right col-xs-12 col-md-4'>"+
+				            			"<table>"+
+				            				"<tr>"+
+				              					"<td>EMAIL: </td>"+
+				              					"<td>&nbsp;&nbsp;#{email}</td>"+
+				            				"</tr>"+  
+				            				"<tr>"+
+				          						"<td>PHONE: </td>"+
+				          						"<td>&nbsp;&nbsp;#{phone}</td>"+
+				        					"</tr>"+ 
+				         				"</table>"+  
+				         				"<div class='col-xs-12 col-md-6' style='float:right;'>"+
+				      						"<input class='button-join' username = '#{member}'value='INVITE' type='button'/>"+
+				    					"</div> "+ 
+				    					"<br>"+
+				    					"<br>"+
+				    				"</div>"+  
+				    			"</div>"+  
+				    		"<div>"
+    				var uavType;	
+	
+		        	var uavId = ( list[i].uavId==undefined?"NULL":list[i].uavId);
+		        	var teamId = ( list[i].teamId==undefined?"NULL":list[i].teamId);
+		        	if(uavId != "NULL"){
+		        		uavType = getUavTypeById(uavId);
+		        	}else{
+		        		uavType = "NULL";
+		        	}
+		        	div = div.replace("#{username}", list[i].username);
+		        	div = div.replace("#{member}", list[i].username);
+		        	div = div.replace("#{uavType}", uavType);
+		        	div = div.replace("#{teamId}", teamId);
+		        	div = div.replace("#{phone}", list[i].phone);
+		        	div = div.replace("#{email}", list[i].email);	        	
+		        	$(".team-info").append(div);
+				}
+			}  		
+		}	
+    }
+    
+    function getUavTypeById(uavId){
+    	var result;
+    	$.ajax({
+			"url" : "/uavs/get_uav_type",
+			"data" : 'id='+uavId,
+			"async" : false,
+			"type" : "get",
+			"dataType" : "json",
+			"success" : function(json) {
+				if (json.state == 20 && json.data !=null) {
+					result = json.data.levelName;
+				}
+			}
+    	});
+    	return result;
+    }
+    
+    /**** invite a user ajax *****/
+    $(document).on("click",".button-join",function(){
+    	if(teamId =="NULL"){
+    		alert("Please create a team first.")
+    		return false;
+    	}
+    	var newMemberName = $(this).attr("username");
+		$.ajax({
+			"url" : "/teams/add_member",
+			"data":{'newMemberName': newMemberName},
+			"type" : "post",
+			"dataType" :"json",
+			"success" : function(json) {
+				if (json.state == 20) {
+					alert("Invite successfully!");
+					window.location.reload();
+				} else {
+					alert(json.message);
+				}
+			}
+		});
+    })
+    </script>
+
+	<script type="text/javascript">
+	var websocket = null;
+	
+	var userId=$.cookie("userId");
+	
+	async function establishWebSocket(){
+
+	    if('WebSocket' in window){
+	        websocket = new WebSocket("ws://localhost:8080/websocket/"+ userId + "_web");
+	    }
+	    else{
+	        alert('Not support websocket')
+	    }
+	    
+	    await new Promise((resolve) =>{
+	    	websocket.onopen = function(e){
+	    		resolve(e.data);
+	    	};
+	    });
+	}
+	
+	establishWebSocket();
+
+    websocket.onerror = function(){
+        //setMessage("connect error");
+    };
+
+    websocket.onopen = function(event){
+        //setMessage("open");
+    }
+
+    websocket.onmessage = function(event){
+        setMessage(event.data);
+    }
+
+    websocket.onclose = function(){
+        //setMessage("close");
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+  
+    function setMessage(message){
+    	if(message.indexOf(";") != -1 && !isNaN(message.substr(0, 1))){
+    		var s =[];
+        	s = message.split(";");
+            var result = confirm(s[s.length-1]); 
+            websocket.send(message+";"+result);
+    	}else{
+    		alert(message);
+    	}
+    }
+
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+</script>
+</body>
+
+</html>

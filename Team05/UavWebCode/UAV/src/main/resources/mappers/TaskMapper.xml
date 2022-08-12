@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.nottingham.uav.mapper.TaskMapper">
+
+
+	<resultMap id="TaskEntityMap"
+		type="cn.nottingham.uav.entity.Task">
+		<id column="task_id" property="taskId"	/>
+		
+		<result column="height_limit" property="heightLimit"/>
+		<result column="captain" property="captain"/>		
+		<result column="uav_type" property="uavType"/>
+		<result column="uav_amount" property="uavAmount"/>
+		<result column="uav_distance" property="uavDistance"/>
+		<result column="flight_height" property="flightHeight"/>
+		<result column="flight_velocity" property="flightVelocity"/>
+		<result column="formation_type" property="formationType"/>
+		<result column="total_distance" property="totalDistance"/>
+		
+		<result column="total_time" property="totalTime"/>
+		<result column="start_time" property="startTime"/>
+		<result column="finish_time" property="finishTime"/>
+		
+		<result column="created_user" property="createdUser"/>
+		<result column="modified_time" property="modifiedTime"/>
+		<result column="created_time" property="createdTime"/>
+		<result column="modified_time" property="modifiedTime"/>
+	</resultMap>
+	
+	<!-- Integer createTask(Task task) -->
+	<insert id="createTask"
+		parameterType="cn.nottingham.uav.entity.Task"
+		useGeneratedKeys="true"
+		keyProperty="taskId">
+		INSERT INTO t_task (
+			task_id,height_limit,
+			captain,uav_type,
+			uav_amount,uav_distance,
+			flight_velocity,flight_height,
+			origin,destination,
+			formation_type,total_distance,
+			total_time,
+			created_user,created_time,
+			modified_user,modified_time
+		) VALUES (
+			#{taskId},#{heightLimit},
+			#{captain},#{uavType},
+			#{uavAmount},#{uavDistance},
+			#{flightVelocity},#{flightHeight},
+			#{origin},#{destination},
+			#{formationType},#{totalDistance},
+			#{totalTime},
+			#{createdUser},#{createdTime},
+			#{modifiedUser},#{modifiedTime}
+		)
+	</insert>
+	
+	<!-- Task getTaskById(Integer taskId) -->
+	<select id="getTaskById"
+		resultMap="TaskEntityMap">
+		SELECT
+			task_id,height_limit,captain,
+			uav_type,uav_amount,uav_distance,
+			flight_velocity,flight_height,
+			origin,destination,
+			formation_type,total_distance,
+			total_time
+		FROM
+			t_task
+		WHERE 
+			task_id=#{taskId}
+	</select>
+	
+	<!-- Integer deleteTask(Integer taskId) -->
+	<delete id="deleteTask">
+		DELETE FROM
+			t_task
+		WHERE
+			task_Id=${taskId}
+	</delete>
+</mapper>
+
+
+
+
+
+

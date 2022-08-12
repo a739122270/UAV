@@ -1,0 +1,1066 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>PERSONAL HOMEPAGE - UAV Fleet Management</title>
+<link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ /> 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/personal-homepage.css" />
+<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/main.css" />
+
+<!--link rel="stylesheet" href="../assets/css/menu-bar.css" /-->
+
+<script src="../bootstrap3/js/holder.js"></script>
+<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+<script src="../bootstrap3/js/bootstrap.js"></script>
+</head>
+<body class="is-preload">
+
+
+  <!-- 导航 -->   
+  <nav class="navbar navbar-static-top navigation navbar-fixed-top" >
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="../images/logo-V4.png" class="navbar-brand" style = "transform:scale(1.5)" alt="logo-white" />
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav">           
+        <li><a href="index.html">INDEX</a></li> 
+            <li><a href="personal-homepage.html">DASHBOARD</a></li>
+            <li><a href="http://localhost:3000">CHAT ROOM</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                FLIGHT TASK<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="task-create.html">Task Creation</a></li>
+                <li><a href="flight.html">Task In Progress</a></li>
+                <li><a href="task-history.html">Task History</a></li>
+              </ul>
+            </li>
+            <li class="active dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                SEARCH<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="team-search.html">Team Search</a></li>
+                <li><a href="user-search.html">User Search</a></li>
+              </ul>
+            </li>
+            
+       </ul>
+     <ul class="nav navbar-nav navbar-right">
+    	<li><a href="login.html">LOG OFF</a></li>
+  	</ul>
+      </div>
+      
+   </div><!-- /.container-fluid -->
+ </nav>
+
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+	<div class="logo">
+        <span class="icon fa-gem"></span>
+      </div>
+      <div class="content">
+        <div class="inner">
+          <h1 id="usernameTitle">User Name</h1>
+          <p>
+            Self-introduction
+          </p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#task">TASK</a></li>
+          <li><a href="#uav">UAV</a></li>
+          <li><a href="#team">TEAM</a></li>
+          <li><a href="#info">INFO</a></li>
+          <!--<li><a href="#elements">Elements</a></li>-->
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!--TASK -->
+      <article id="task">
+        <h2 class="major">TASK</h2>
+        <div id="task-buttons-fields">
+          <ul class="actions" style="margin-left:-20px;">
+            <li><input id="btn-create-task" type="button" class="primary" value="Create a task" /></li>
+            <li><input id="btn-task-history" type="button" value="task history" /></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- UAV -->
+      <article id="uav">
+        <h2 class="major">UAV</h2>
+        <form id="form-uav">
+          <div class="fields">
+            <div class="field half">
+              <label for="uav-type">UAV BRAND</label> 
+              <select name="uavBrand" class="form-control" id="brand"></select>           
+              </div>
+            <div class="field half">
+              <label for="uav-type">UAV SERIES</label> 
+              <select name="uavSeries" class="form-control" id="series"></select>   
+            </div>
+            <div class="field">
+              <label for="uav-type">UAV TYPE</label> 
+              <select name="uavType" class="form-control" id="type"></select>   
+            </div>
+            <ul class="actions">
+              <li><input id="btn-modify-uav" type="button" class="primary" value="Modify" /></li>
+              <li><input id="btn-save-uav" type="button" value="Save" /></li>
+            </ul>
+          </div>
+        </form>
+      </article>
+
+      <!-- TEAM -->
+      <article id="team">
+        <h2 class="major">TEAM</h2>
+        <div id="team-buttons-fields" style="display:none">
+          <ul class="actions" style="margin-left:-20px;">
+            <li><input id="btn-create-team" type="button" class="primary" value="Create a team" /></li>
+            <li><input id="btn-join-team" type="button" value="Join a team" /></li>
+            <li><input id="btn-search-team" type="button" value="Search a team" /></li>
+          </ul>
+        </div>
+        <form id="form-team">
+           <div class="fields">
+              <div class="field">
+                <!--label for="privacy">Privacy</label--> 
+                  <label class="gender-female" style="margin-bottom:-10px;padding-right:60px; float:left;"> 
+                    <input type="radio" id="private" name="isPrivate" value="1" disabled="disabled"/> 
+                    <span>private</span>
+                  </label> 
+                  <label class="gender-male" style="margin-bottom:-10px;"> 
+                    <input type="radio" id="public" name="isPrivate" value="0" disabled="disabled"/> 
+                    <span>public</span>
+                  </label>
+              </div> 
+              <div class="field half">
+                <label for="team-id">TEAM ID</label> 
+                <input type="text" value="" name="teamId" id="teamId"  readonly="readonly" />
+              </div>
+              <div class="field half" >
+                <label for="owner" >OWNER</label> 
+                <input type="text" value="" name="owner" id="owner" readonly="readonly" />
+              </div>
+              <div class="field half">
+                <label for="team-name">TEAM NAME</label> 
+                <input type="text" value="" name="teamName" id="teamName" readonly="readonly" />
+              </div>
+              <div class="field half">
+                <label for="uav-type">UAV TYPE</label> 
+                <input class="btn-set-type" id="btn-set-type-1" type="button" value="Set" style="float:right;width:45%;" disabled="disabled"/>        
+				<input type="text" value="" name="uavId" id="uavType" style="width:45%;" readonly="readonly"/>     
+              </div>
+              <div class="field half">
+                <label for="max-member">maximum member number</label> 
+                <input type="text" value="" name="maxMemberNumber" id="maxMemberNumber" readonly="readonly" />
+              </div>
+               <div class="field half">
+                <label for="flight-area">main flight area</label> 
+                <input type="text" value="" name="flightArea" id="flightArea" readonly="readonly" />
+              </div>
+              <div class="field half">
+                <label for="members">MEMBERS</label>
+                <div class="members-content"> 
+                  <div id="members-list">     
+                  </div>                            
+                  <div class="add-button-field">
+                    <input id="btn-add-member" type="button" style="display:none" class="primary" value="Add new member"/>
+                  </div> 
+                </div> 
+              </div>
+
+              <div class="field half">
+                <label for="tasks-history">TASKS HISTORY</label>
+                <div class="tasks-content"> 
+                  <div class="task-info">
+                    <span>2020-02-19</span>&nbsp;
+                    <a href="#">Task name</a>
+                  </div>
+                  <div class="task-info">
+                    <span>2020-02-19</span>&nbsp;
+                    <a href="#">Task name</a>
+                  </div>
+                  <div class="add-button-field">
+                    <input id="btn-add-task" type="button"  value="Add new task" />
+                  </div>
+                 </div>
+              </div>
+              <ul class="actions">
+                <li><input id="btn-disband-team" type="button" value="Disband team" style="display:none"/></li>
+                <li><input id="btn-quit-team" type="button" value="Quit My team" style="display:none"/></li>
+                <li><input id="btn-replace-owner" type="button" class="primary" value="replace owner"/></li>        
+              </ul>
+              <ul class="actions" style="margin-top:0px;">
+                <li><input id="btn-modify-team" type="button" value="modify" style="display:none"/></li>
+                <li><input id="btn-save-modify-team" type="button" class="primary" value="save" style="display:none" /></li>
+              </ul>
+            </div>
+         </form>
+         
+         <form id="form-team-establish">
+           <div class="fields">
+              <div class="field half">
+                <label for="team-name">TEAM NAME</label> 
+                <input type="text" value="" name="teamName" id="new-teamname"/>
+              </div>
+              <div class="field half">
+                <!--label for="gender">Privacy</label--> 
+                <label class="gender-female" style="margin-top:45px;"> 
+                  <input type="radio" id="private" name="isPrivate" value="1"/> 
+				  <span> &nbsp; private &nbsp; &nbsp;</span>
+				  <input type="radio" id="public" name="isPrivate" value="0" checked/> 
+                  <span>public</span>
+                </label> 
+                <!--label class="gender-female"> 
+                  <input type="radio" id="public" name="isPrivate" value="0" checked/> 
+                  <span>public</span>
+                </label-->
+              </div>  
+              <div class="field half">
+                <label for="owner">OWNER</label> 
+                <input type="text" value="" name="owner" id="new-owner" readonly="readonly"/>
+              </div>
+              <div class="field half">
+                <label for="uav-type">UAV TYPE</label> 
+                <input class="btn-set-type" id="btn-set-type-2" type="button" value="Set" style="width:45%;float:right"/>
+                <input type="text" value="" name="uavId" id="new-uavType" style="width:45%;" readonly="readonly"/>
+              </div>
+              <div class="field half">
+                <label for="max-member">maximum member number</label> 
+                <input type="text" value="" name="maxMemberNumber" id="new-maxMemberNumber"/>
+              </div>
+               <div class="field half">
+                <label for="flight-area">main flight area</label> 
+                <input type="text" value="" name="flightArea" id="new-flightArea"/>
+              </div>
+              <ul class="actions">
+                <li><input id="btn-save-team" type="button" class="primary" value="create"/></li>
+                <li><input id="btn-back-team" type="button" value="back"/></li>
+              </ul>
+            </div>
+         </form>
+      </article>
+
+      <!-- INFO -->
+      <article id="info">
+        <h2 class="major">INFO</h2>
+        <form id="form-change-info">       
+          <div class="form-avatar">
+            <div style="float:left">
+			  <img id="img-avatar" src="../images/default-avatar.jpg" class="img-responsive" />
+              <input name="file" type="file" id="choose-file">
+            </div>
+            <div class="avatar-button-field">
+              <input id="btn-change-avatar" type="button" value="upload" />
+            </div>
+          </div>  
+          <div class="fields">
+            <div class="field half">
+              <label for="name" style="color:#B8B8B8">User Name</label> <input type="text" value="Lucy" name="name" id="username" style="color:#B8B8B8;border-color:#B8B8B8" readonly="readonly" />
+            </div>
+            <div class="field half" style="margin-left: 40px; width: 80px;">
+              <label for="gender">Gender</label> 
+              <label class="gender-male"> 
+                <input type="radio" id="gender-male" name="gender" value="1" disabled="disabled" /> 
+                <span>male</span>
+              </label> 
+              <label class="gender-female"> 
+                <input type="radio" id="gender-female" name="gender" value="0" disabled="disabled" /> 
+                <span>female</span>
+              </label>
+            </div>
+            <div class="field">
+              <label for="email">Email</label> 
+              <input type="text" value="133@163.com" name="email" id="email" readonly="readonly" />
+            </div>
+            <div class="field">
+              <label for="telephone">Telephone</label>
+              <input type="text" value="1333222222" name="phone" id="phone" readonly="readonly" />
+            </div>
+            <ul class="actions">
+              <li><input id="btn-modify-info" type="button" class="primary" value="Modify" /></li>
+              <li><input id="btn-save-info" type="button" value="Save" /></li>
+            </ul>
+          </div>
+        </form>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <p class="copyright">
+		  Uav Fleet Management
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- BG -->
+  <div id="bg" ></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <!-- AJAX -->
+  <script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    
+  
+  	/****** check ownership *****/
+  	var ownership=0;
+  	$.ajax({
+		"url":"/teams/check_ownership",
+		"data":null,
+		"type":"get",
+		"dataType":"json",
+		"success":function(json) {
+			if(json.state == 20){
+				if(json.data == true){
+					ownership = 1;
+					//show owner's functions
+					$("#btn-replace-owner").attr("style","display:block;");
+					$("#btn-disband-team").attr("style","display:block;");
+					$("#btn-add-member").attr("style","display:block;");
+					$("#btn-save-modify-team").attr("style","display:block;");
+					$("#btn-modify-team").attr("style","display:block;");
+					//hide member's functions
+					$("#btn-quit-team").attr("style","display:none;");
+				}else{
+					ownership = 0;
+					//hide owner's functions
+					$("#btn-replace-owner").attr("style","display:none;");
+					$("#btn-disband-team").attr("style","display:none;");
+					$("#btn-add-member").attr("style","display:none;");
+					//show member's functions
+					$("#btn-quit-team").attr("style","display:block;");
+				}
+			}
+		}
+	});		
+  	
+  
+  	
+  	
+  	/*--------------------------------------- task function --------------------------------*/
+	/****  create task  ****/
+  	$("#btn-create-task").click(function (){
+  		window.location.href="task-create.html";
+  	});
+  	
+  	
+  	 	
+  	
+  	/*------------------------------------------uav function----------------------------------*/
+  	/****  uav choice ajax   ****/
+  	function displayUavSelection(){
+  		
+  		$("#brand").empty();
+		$("#series").empty();
+		$("#type").empty();
+  		
+  		var defaultOption=
+			"<option value='0'>--- please choose ---</option>";
+
+		$("#brand").append(defaultOption);
+		$("#series").append(defaultOption);
+		$("#type").append(defaultOption);
+
+		appendList(0,"brand");
+		
+		$("#brand").unbind('change').bind('change',function(){
+			var value = this.value;
+			
+			$("#series").empty();
+			$("#series").append(defaultOption);
+
+			$("#type").empty();
+			$("#type").append(defaultOption);
+			if(value!=0){
+  				appendList(value,"series");
+			}
+		});
+		
+		$("#series").unbind('change').bind('change',function(){
+			var value=this.value;
+
+			$("#type").empty();
+			$("#type").append(defaultOption);
+			if(value!=0){			
+    			appendList(value,"type");
+			}
+		});
+  	}
+		
+  	function appendList(pid,sid){
+		$.ajax({
+			"url":"/uavs/get_uav",
+			"data":"pid="+pid,
+			"type":"get",
+			"dataType":"json",
+			"success":function(json) {
+      			var list = json.data;
+      			for(var i=0;i<list.length;i++){
+          			var option="<option value='"+
+          		  	list[i].id+"'>"+list[i].levelName+"</option>";	
+          			$("#"+sid).append(option);
+      			}
+			}
+		});
+	}
+	
+  	/**** add UAV ajax *****/
+	$("#btn-save-uav").click(function() {
+		if($("#type").val() == 0){
+			alert("Save error. Please choose one uav type.");
+		}else{
+			$.ajax({
+				"url" : "/users/add_uav",
+				"data" : {uavId:$("#type").find("option:selected").val()},
+				"type" : "post",
+				"dataType" : "json",
+				"success" : function(json) {
+					if (json.state == 20) {
+						$("#brand").attr("disabled", "disabled");
+						$("#series").attr("disabled", "disabled");
+						$("#type").attr("disabled", "disabled");
+						
+						alert("Save successfully!");
+						
+						$("#new-uavType").val($("#type").find("option:selected").text());
+						
+						$.cookie("uavType",$("#new-uavType").val(),{"expires":7});
+						
+						if(ownership == 1){
+							$("#uavType").val($("#type").find("option:selected").text());	
+						}	
+						
+						//acquire previous page url
+						var uri =  document.referrer;
+						var arrurl = uri.split('/');			
+						if (arrurl[arrurl.length-1] == "team-search.html") {						
+							//Refresh after jump
+						    self.location=document.referrer;
+						}else{
+							window.history.back();
+						}
+						
+					} else {
+						alert(json.message);
+					}
+				}, 				
+	  			"error":function(json){
+	    			alert("Login status is invalid, please login again!");
+	    			location.href="login.html";
+	  			}
+			});
+		}
+	});
+  	
+  	//modify uav
+  	$("#btn-modify-uav").click(function() {
+  		$("#brand").removeAttr("disabled");
+  		$("#series").removeAttr("disabled");
+  		$("#type").removeAttr("disabled");
+  		displayUavSelection();
+  	});
+ 
+  	/*** get uav and superiors ajax   ***/
+  	function displayUavSuperiors(uavId){
+  		$.ajax({
+			"url":"/uavs/get_uav_superiors",
+			"data":"uavId=" + uavId,
+			"type":"get",
+			"dataType":"json",
+			"success":function(json) {
+				var list = json.data;
+      			
+          		var type="<option value='"+
+          		  list[0].id+"'>"+list[0].levelName+"</option>";	
+          		$("#type").append(type);
+          		
+          		var series="<option value='"+
+        		  list[1].id+"'>"+list[1].levelName+"</option>";	
+        		$("#series").append(series);
+        		
+        		var brand="<option value='"+
+      		  	list[2].id+"'>"+list[2].levelName+"</option>";	
+      			$("#brand").append(brand);
+      			
+      			$("#uavType").val(list[0].levelName);
+			}, 				
+  			"error":function(json){
+    			alert("Login status is invalid, please login again!");
+    			location.href="login.html";
+  			}
+		});		
+  	}
+  	
+  	/***  get uavType ajax ***/
+  	function getUavTypeById(id){
+  		$.ajax({
+  			"url" : "/uavs/get_uav_type",
+  			"data" : "id="+id,
+  			"type" : "get",
+  			"dataType" : "json",
+  			"success" : function(json) {
+  				if (json.state == 20) {
+  					$("#uavType").val(json.data.levelName);
+  				}
+  			}, 				
+  			"error":function(json){
+    			alert("Login status is invalid, please login again!");
+    			location.href="login.html";
+  			}
+  		});
+  	};
+  	
+
+  	
+  	
+  	
+  	
+  	/*------------------------------------------team function----------------------------------*/  	
+  	/****  establish team ajax  ****/
+  	$("#btn-create-team").click(function (){
+  		$("#team-buttons-fields").attr("style","display:none;");
+  		$("#form-team-establish").show();
+  		if($("#type").find("option:selected").val() ==0 ){
+  			$("#new-uavType").val("PLEASE SET");
+  		}else{
+  			$("#new-uavType").val($("#type").find("option:selected").text());	
+  		}
+  		$("#new-owner").val($("#username").val());			
+  	});
+  	
+  	$("#btn-back-team").click(function(){
+  		$("#team-buttons-fields").attr("style","display:block;");
+  		$("#form-team-establish").hide();
+  	});
+  	
+	$(".btn-set-type").click(function(){
+		window.location.href="personal-homepage.html#uav";
+  	});
+	
+	$("#btn-save-team").click(function(){
+		if($("#new-teamname").val() == "" ||
+			$("#new-uavType").val() == "" ||
+			$("#new-maxMemberNumber").val() == "" ||
+			$("#new-flightArea").val() == ""
+				){
+			alert("Create error! This form is not complete.");
+		}else{
+			$("#new-uavType").val($("#type").val());
+			$.ajax({
+				"url" : "/teams/establish",
+				"data" : $("#form-team-establish").serialize(),
+				"type" : "post",
+				"dataType" : "json",
+				"success" : function(json) {
+					if (json.state == 20) {
+						window.location.reload();
+					}else{
+						alert(json.message);
+					}
+				}, 				
+	  			"error":function(json){
+	    			alert("Login status is invalid, please login again!");
+	    			location.href="login.html";
+	  			}
+			});
+		}
+	});
+  	
+ 	
+	
+	/**** team  info  ajax  *****/
+	$.ajax({
+		"url" : "/teams/get_team_info",
+		"data" : null,
+		"type" : "get",
+		"dataType" : "json",
+		"success" : function(json) {
+			if (json.state == 20 && json.data !=null) {
+				var teamId = json.data.teamId;
+				$("#teamId").val(json.data.teamId);
+				$("#teamName").val(json.data.teamName);
+				$("#owner").val(json.data.owner);
+				$("#maxMemberNumber").val(json.data.maxMemberNumber);
+				$("#flightArea").val(json.data.flightArea);
+				if(!isNaN(json.data.isPrivate)){
+					var privacy = json.data.isPrivate == 0 ? "public" : "private"; // 0/1                 
+					$("#" + privacy).prop('checked', 'true');
+				}
+				displayMembers(teamId);
+				
+				getUavTypeById(json.data.uavId);
+			}
+		}
+	});
+		
+	
+	/*****  team member list ajax   *****/
+	function displayMembers(teamId){
+		$.ajax({
+			"url" : "/teams/get_users_list",
+			"data" : {'teamId':teamId},
+			"type" : "get",
+			"dataType" : "json",
+			"success" : function(json) {
+				if (json.state == 20 && json.data !=null) {
+					var list = json.data;
+					for(var i=0;i<list.length;i++){
+						var div = "<div class='member-info' id='member-info'>"+
+		                				"<div style='float:left'>"+
+		                  					"<img id='img-member-avatar1' style='width:30px; height:30px; border-radius:50%; border:solid 1.5px #FFFFFF' src='#{avatar}' class='img-responsive' />"+
+		               					"</div>"+
+		                				"<p style='margin-left:50px;padding-top:6px;'><a href='#'>#{username}</a>"+	
+		                					"<input id='btn-delete-member#{userId}' type='button' onclick='deleteMember(#{memberId})' value='#{buttonValue}'/>"+
+		                				"</p>"+
+		                				"<p>EMAIL: #{email}</p>"+
+		              			  "</div>";
+		              	div = div.replace("#{avatar}", list[i].avatar);
+		            	div = div.replace("#{username}", list[i].username);
+		            	div = div.replace("#{email}", list[i].email);
+		            	div = div.replace("#{userId}", list[i].userId);
+		            	div = div.replace("#{memberId}", list[i].userId);
+		            	
+		            	if(list[i].username == $("#username").val()){
+		            		div = div.replace("#{buttonValue}", "myself");			       		        
+		            	}else{
+		            		div = div.replace("#{buttonValue}", "delete");
+		            	}
+		            	
+		              	$("#members-list").append(div);
+		              	
+		              	if(list[i].username == $("#username").val()){
+		            		$("#btn-delete-member"+list[i].userId).attr("disabled","disabled");	       		        
+		            	}
+		              	if($("#username").val() != $("#owner").val() && list[i].username != $("#username").val()){
+		            		$("#btn-delete-member"+list[i].userId).attr("style","display:none");	
+		            	}
+					}
+				}
+			}
+		});
+	}
+	
+	//delete member
+	function deleteMember(memberId){
+		$.ajax({
+			"url" : "/teams/delete_member",
+			"data":{'deleteUserId':memberId},
+			"type" : "post",
+			"dataType" : "json",
+			"success" : function(json) {
+				if (json.state == 20) {
+					alert("Delete successfully！");
+					window.location.reload();
+				} else {
+					alert(json.message);
+				}
+			}, 				
+  			"error":function(json){
+    			alert("Login status is invalid, please login again!");
+    			location.href="login.html";
+  			}
+		});
+	}
+	
+	/**** add a member *****/
+	$("#btn-add-member").click(function() {
+		var newMemberName = prompt("Please input a username:","");
+		if(newMemberName != null){
+			$.ajax({
+				"url" : "/teams/add_member",
+				"data":{'newMemberName': newMemberName},
+				"type" : "post",
+				"dataType" :"json",
+				"success" : function(json) {
+					if (json.state == 20) {
+						alert("add successfully");
+						window.location.reload();
+					} else {
+						alert(json.message);
+					}
+				}
+			});
+		}     
+	});
+		
+	/**** join a team ajax *****/
+	$("#btn-join-team").click(function() {
+		var teamId = prompt("Please input a team ID:","");
+		if(isNaN(teamId)){
+			alert("format error. teamId must be digital");
+		}
+		parseInt(teamId);
+		if(teamId != null){
+			$.ajax({
+				"url" : "/teams/join",
+				"data":{'teamId': teamId},
+				"type" : "post",
+				"dataType" :"json",
+				"success" : function(json) {
+					if (json.state == 20) {
+						alert("Join successfully");
+						window.location.reload();
+					} else {
+						alert(json.message);
+					}
+				}
+			});
+		}
+	});
+	
+	
+	/**** disband team  *****/
+	$("#btn-disband-team").click(function(){
+		$.ajax({
+			"url" : "/teams/disband_team",
+			"data":null,
+			"type" : "post",
+			"dataType" :"json",
+			"success" : function(json) {
+				if(json.state == 20){
+					alert("Disband successfully");
+					window.location.reload();
+				}else{
+					alert(json.message);
+				}
+			}
+		});
+	});
+	
+	
+	
+	/**** search a team   ****/
+	$("#btn-search-team").click(function(){
+		window.location.href="team-search.html";
+	});
+
+	
+	
+	/**** quit my team   ****/
+	$("#btn-quit-team").click(function() {
+		$.ajax({
+			"url" : "/teams/quit",
+			"data":null,
+			"type" : "post",
+			"dataType" :"json",
+			"success" : function(json) {
+				if (json.state == 20) {
+					alert("Quit successfully");
+					window.location.reload();
+				} else {
+					alert(json.message);
+				}
+			}
+		});
+	});
+	
+	
+	
+	/**** transfer team ownership *****/
+  	$("#btn-replace-owner").click(function() {
+  		var newOwnerName = prompt("Please input a member name:","");
+  		if(newOwnerName != null){
+  			$.ajax({
+  				"url" : "/teams/transfer_ownership",
+  				"data":{'newOwnerName':newOwnerName},
+  				"type" : "post",
+  				"dataType" :"json",
+  				"success" : function(json) {
+  					if (json.state == 20) {
+  						alert("Replace successfully");
+  						window.location.reload();
+  					} else {
+  						alert(json.message);
+  					}
+  				}
+  			});
+  		}
+  	});
+	
+	
+  	/**** modify  team info ajax *****/
+	//allow to modify info
+	$("#btn-modify-team").click(function() {
+		$("#teamName").removeAttr("readonly");
+		$("#uavType").removeAttr("readonly");
+		$("#maxMemberNumber").removeAttr("readonly");
+		$("#flightArea").removeAttr("readonly");
+
+		$("#public").removeAttr("disabled");
+		$("#private").removeAttr("disabled");
+		$(".btn-set-type").removeAttr("disabled");
+
+		$("#teamName").focus();
+	});
+	
+  	
+	//save team modification
+	$("#btn-save-modify-team").click(function(){
+		if($("#teamName").val() == "" ||
+			$("#uavType").val() == "" ||
+			$("#maxMemberNumber").val() == "" ||
+			$("#flightArea").val() == ""
+		){
+			alert("Modify error! This form is not complete.");
+		}else{
+			$("#uavType").val($("#type").val());
+			$.ajax({
+				"url" : "/teams/modify",
+				"data" : $("#form-team").serialize(),
+				"type" : "post",
+				"dataType" : "json",
+				"success" : function(json) {
+					if(json.state=20){	
+						window.location.reload();
+					}else{
+						alert(json.message)
+					}
+				}
+			});
+		}
+	});
+	
+
+	
+	/*------------------------------------------user function----------------------------------*/
+	
+	/**** user info ajax *****/
+	$.ajax({
+		"url" : "/users/get_by_userId",
+		"data" : null,
+		"type" : "get",
+		"dataType" : "json",
+		"success" : function(json) {
+			if (json.state == 20) {
+				// undefined -> ""
+				var uavId = (json.data.uavId==undefined?"":json.data.uavId);
+				var teamId = (json.data.teamId==undefined?"":json.data.teamId);
+				//display team form based on teamId
+				if(teamId == ""){
+					$("#form-team").hide();
+					$("#form-team-establish").hide();
+					$("#team-buttons-fields").attr("style","display:block;");
+				}else{
+					$("#form-team-establish").hide();
+					$("#team-buttons-fields").attr("style","display:none;");
+				}
+				
+				//display uav form based on uavId
+				if(uavId ==""){
+					displayUavSelection();
+				}else{
+					displayUavSuperiors(uavId);
+					$("#brand").attr("disabled","disabled");
+					$("#series").attr("disabled","disabled");
+					$("#type").attr("disabled","disabled");
+				}
+				//add user data to user form
+				$("#usernameTitle").html(json.data.username);
+				$("#username").val(json.data.username);
+				$("#phone").val(json.data.phone);
+				$("#email").val(json.data.email);
+				
+				var avatar=$.cookie("avatar"); //require avatar from cookie       
+				$("#img-avatar").attr("src",avatar);
+				
+				//determine gender
+				if(!isNaN(json.data.gender)){
+					var genderId = json.data.gender == 0 ? "gender-female" : "gender-male"; // 0/1                 
+					$("#" + genderId).prop('checked', 'true');
+				}
+			} else {
+				alert(json.message);
+			}
+		}
+	});
+	
+	
+	
+	
+	
+	
+	
+	/**** modify  user info  ajax  *****/
+	//allow to modify info
+	$("#btn-modify-info").click(function() {
+		$("#phone").removeAttr("readonly");
+		$("#email").removeAttr("readonly");
+
+		$("#gender-female").removeAttr("disabled");
+		$("#gender-male").removeAttr("disabled");
+
+		$("#email").focus();
+	});
+
+	
+	//limit radio choice
+	$('#gender-male').click(function() {
+		if ($('#gender-female').is(':checked')) {
+			$("#gender-female").prop('checked', false);
+		}
+
+	});
+
+	$('#gender-female').click(function() {
+		if ($('#gender-male').is(':checked')) {
+			$("#gender-male").prop('checked', false);
+		}
+
+	});
+	
+	//save new information
+	$("#btn-save-info").click(function() {
+		$.ajax({
+			"url" : "/users/change_info",
+			"data" : $("#form-change-info").serialize(),
+			"type" : "post",
+			"dataType" : "json",
+			"success" : function(json) {
+				// Triggered when the server returns a status code of 200
+				if (json.state == 20) {								
+					alert("update success！");					
+					$("#gender-female").attr("disabled", "disabled");
+					$("#gender-male").attr("disabled", "disabled");
+					$("#phone").attr("readonly", "readonly");
+					$("#email").attr("readonly", "readonly");
+					
+				} else {
+					alert(json.message);
+				}
+			}
+		});
+	});
+	
+	
+	/***   update avatar ajax   *****/
+	//select and preview avatar
+	$(document).ready(function(){
+	    $('#img-avatar').click(function(){
+	        $('#choose-file').click();
+	        $('#choose-file').change(function(){
+	            $('#img-avatar').attr("src",URL.createObjectURL($(this)[0].files[0]));
+	            $("#btn-change-avatar").attr("style","display:block;");
+	        });
+	    });
+	});
+	
+	//upload avatar 
+    $("#btn-change-avatar").click(function() {
+       $.ajax({
+          "url":"/users/change_avatar",
+          "data":new FormData($("#form-change-info")[0]),
+          "type":"post",
+          "contentType":false,
+       	  "processData":false,
+          "dataType":"json",
+          "success":function(json) {
+            if (json.state == 20) {
+              alert("upload successfully.");
+              $("#img-avatar").attr("src",json.data);
+              // update avatar cookie path
+              $.cookie("avatar",json.data,{"expires":7});
+              //hidden upload button
+              $("#btn-change-avatar").attr("style","display:none;");
+              window.location.reload();
+            } else {
+              alert(json.message);
+            }
+          }
+        });
+      });
+</script>
+  <script type="text/javascript">
+	var websocket = null;
+	
+	var userId=$.cookie("userId");
+	
+	async function establishWebSocket(){
+
+	    if('WebSocket' in window){
+	        websocket = new WebSocket("ws://localhost:8080/websocket/"+ userId + "_web");
+	    }
+	    else{
+	        alert('Not support websocket')
+	    }
+	    
+	    await new Promise((resolve) =>{
+	    	websocket.onopen = function(e){
+	    		resolve(e.data);
+	    	};
+	    });
+	}
+	
+	establishWebSocket();
+
+    //Callback method for connection error
+    websocket.onerror = function(){
+        //setMessage("connect error");
+    };
+
+    //Callback method for connection success
+    websocket.onopen = function(event){
+        //setMessage("open");
+    }
+
+    //The callback method that receives the message
+    websocket.onmessage = function(event){
+        setMessage(event.data);
+    }
+
+    //Call-back method for connection closure
+    websocket.onclose = function(){
+        //setMessage("close");
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+  
+    function setMessage(message){
+    	if(message.indexOf(";") != -1 && !isNaN(message.substr(0, 1))){
+    		var s =[];
+        	s = message.split(";");
+            var result = confirm(s[s.length-1]); 
+            websocket.send(message+";"+result);
+    	}else{
+    		alert(message);
+    	}
+    }
+
+    //close connection
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+</script>
+</body>
+</html>

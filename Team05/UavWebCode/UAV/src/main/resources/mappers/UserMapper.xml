@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.nottingham.uav.mapper.UserMapper">
+	<resultMap id="UserEntityMap"
+		type="cn.nottingham.uav.entity.User">
+		<id column="user_id" property="userId"/>
+		<id column="team_id" property="teamId"/>
+		<id column="uav_id" property="uavId"/>
+		<id column="task_id" property="taskId"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="salt" property="salt"/>
+		<result column="is_delete" property="isDelete"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="avatar" property="avatar"/>
+		<result column="created_user" property="createdUser"/>
+		<result column="modified_time" property="modifiedTime"/>
+		<result column="created_time" property="createdTime"/>
+		<result column="modified_time" property="modifiedTime"/>
+	</resultMap>
+	
+	<!-- user register -->
+	<!-- Integer addUser(User user) -->
+	<insert id="addUser"
+		useGeneratedKeys="true"
+		keyProperty="userId">
+		INSERT INTO t_user (
+			username,password,
+			salt,is_delete,
+			phone,email,
+			gender,avatar,
+			created_user,created_time,
+			modified_user,modified_time
+		) VALUES (
+			#{username},#{password},
+			#{salt},#{isDelete},
+			#{phone},#{email},
+			#{gender},#{avatar},
+			#{createdUser},#{createdTime},
+			#{modifiedUser},#{modifiedTime}
+		)
+	</insert>
+	
+	<!-- select user by name -->
+	<!-- User findUserbyName(String username) -->
+	<select id="findUserByName"
+		resultMap="UserEntityMap">
+		SELECT
+			user_id,team_id,username,avatar,
+			password,salt,
+			gender,avatar,is_delete
+		FROM
+			t_user
+		WHERE 
+			username=#{username}
+	</select>	
+	
+	<!-- search user by user ID -->
+	<!-- User findUserByUserId(Integer uid); -->
+	<select id="findUserByUserId"
+		resultMap="UserEntityMap">
+		SELECT
+			username,user_id,
+			team_id,uav_id,
+			avatar,is_delete,
+			phone,email,
+			gender
+		FROM
+			t_user
+		WHERE 
+			user_id=#{userId}
+	</select>
+	
+	<!-- select user by teamId and UserName -->
+	<!-- User findUserByTeamIdAndUserName(Integer teamId,String username) -->
+	<select id="findUserByTeamIdAndUserName"
+		resultMap="UserEntityMap">
+		SELECT
+			user_id,team_id,
+			username,gender,
+			avatar,is_delete
+		FROM
+			t_user
+		WHERE 
+			team_id=#{teamId}
+		AND
+			username=#{username}
+	</select>
+	
+	<!-- select users by teamId -->
+	<!-- User findUsersByTeamId(Integer teamId) -->
+	<select id="findUsersByTeamId"
+		resultMap="UserEntityMap">
+		SELECT
+			user_id,team_id,
+			username,gender,
+			phone,email,
+			avatar,is_delete
+		FROM
+			t_user
+		WHERE 
+			team_id=#{teamId}
+		ORDER BY
+			user_id ASC
+	</select>
+	
+	<!-- User findUsersByTaskId(Integer taskId) -->
+	<select id="findUsersByTaskId"
+		resultMap="UserEntityMap">
+		SELECT
+			user_id,task_id,
+			username,gender,
+			phone,email,
+			avatar,is_delete
+		FROM
+			t_user
+		WHERE 
+			task_id=#{taskId}
+		ORDER BY
+			user_id ASC
+	</select>
+	
+	<!-- Integer getTaskIdByUserId(Integer userId); -->
+	<select id="getTaskIdByUserId"
+		resultType="Integer">
+		SELECT
+			task_id
+		FROM
+			t_user
+		WHERE 
+			user_id=#{userId}
+	</select>
+	
+	
+	<!-- update user information -->
+	<!-- Integer updateInfo(User user) -->
+	<update id="updateInfo">
+		UPDATE
+			t_user
+		SET
+			phone=#{phone},
+        	email=#{email},
+        	gender=#{gender},
+        	modified_user=#{modifiedUser}, 
+        	modified_time=#{modifiedTime} 
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	
+	<!-- freeze user information -->
+	<!-- Integer freezeAccount(String admName) -->
+	<update id="freezeAccount">
+		UPDATE
+			t_user
+		SET
+			is_delete = #{isFreeze},
+			modified_user=#{modifiedUser}, 
+        	modified_time=#{modifiedTime} 
+		WHERE
+			username=#{username}
+	</update>
+	
+	<!-- add uav Id -->
+	<!-- Integer updateUavId() -->
+	<update id="updateUavId">
+		UPDATE
+			t_user
+		SET
+			uav_id =#{uavId},
+        	modified_user=#{modifiedUser}, 
+        	modified_time=#{modifiedTime} 
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	<!-- add team Id -->
+	<!-- Integer updateTeamId() -->
+	<update id="updateTeamId">
+		UPDATE
+			t_user
+		SET
+			team_id =#{teamId},
+        	modified_user=#{modifiedUser}, 
+        	modified_time=#{modifiedTime} 
+		WHERE
+			user_id=#{userId}
+	</update>
+	
+	<!-- updateAvatar -->
+	<!-- Integer updateAvatar() -->
+	<update id="updateAvatar">
+		UPDATE 
+			t_user
+		SET 
+			avatar=#{avatar},
+			modified_user=#{modifiedUser}, 
+			modified_time=#{modifiedTime} 
+		WHERE 
+			user_id=#{userId}
+	</update>
+	
+	<!-- updateTaskId -->
+	<!-- Integer updateTaskId() -->
+	<update id="updateTaskId">
+		UPDATE 
+			t_user
+		SET 
+			task_id=#{taskId},
+			modified_user=#{modifiedUser}, 
+			modified_time=#{modifiedTime} 
+		WHERE 
+			user_id=#{userId}
+	</update>
+	
+	<!-- Integer getUserIdByUsername(String username); -->
+	<select id="getUserIdByUsername"
+		resultType="Integer">
+		SELECT
+			user_id
+		FROM
+			t_user
+		WHERE 
+			username=#{username}
+	
+	</select>
+	
+	<!-- List<User> findUsersByAlphabet(String order); -->
+	<select id="findUsersByAlphabet"
+		resultMap="UserEntityMap">
+		SELECT
+			username,user_id,
+			gender,phone,
+			email,team_id,is_delete
+		FROM
+			t_user
+		ORDER BY 
+			convert(username using gbk)collate gbk_chinese_ci ${order};
+	</select>
+</mapper>
+
+
+
+
+
+

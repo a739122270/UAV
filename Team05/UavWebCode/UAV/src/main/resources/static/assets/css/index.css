@@ -1,0 +1,166 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");*/
+
+/* Basic */
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@media screen and (max-width: 480px) {
+
+    html, body {
+        min-width: 320px;
+    }
+
+}
+
+/* Type */
+
+html {
+    font-size: 16pt;
+}
+
+    @media screen and (max-width: 1680px) {
+
+        html {
+            font-size: 12pt;
+        }
+
+    }
+
+    @media screen and (max-width: 736px) {
+
+        html {
+            font-size: 11pt;
+        }
+
+    }
+
+    @media screen and (max-width: 360px) {
+
+        html {
+            font-size: 10pt;
+        }
+
+    }
+
+	h1 {
+		font-size: 3.5rem;
+		line-height: 1.3;
+		letter-spacing: 0.4rem;
+	}
+
+	h2 {
+		font-size: 2.5rem;
+		line-height: 1.4;
+		letter-spacing: 0.1rem;
+	}
+
+	h3 {
+		font-size: 1rem;
+	}
+
+	h4 {
+		font-size: 0.8rem;
+	}
+
+	h5 {
+		font-size: 0.7rem;
+	}
+
+	h6 {
+		font-size: 0.6rem;
+	}
+
+	@media screen and (max-width: 736px) {
+
+		h1 {
+			font-size: 1.75rem;
+			line-height: 1.4;
+		}
+
+
+    }
+
+body{
+    padding-bottom: 50px;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    /*background-color:  rgb(210, 226, 241);;*/
+    background-image:none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: rgb(79, 119, 158);
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.navProfileIcon{
+    margin-top: -40%;
+    margin-bottom:-10%;
+    width:65px;
+    height:60px;
+    transform:scale(1.5);
+}
+
+.jumbotron{
+    background:url("../../images/bg4.jpg");
+    color:white;
+    height:65%;
+    margin-top: -20px;
+    }
+
+.textShadow{
+    text-shadow: rgb(145, 138, 138) 3px 4px 5px
+}
+
+.button01{
+    margin: auto;
+    width: 150px;
+}
+.button02{
+    background-color:white;
+    color: dimgrey;
+}
+
+.subContents{
+    font-size: 15px;
+    color: rgb(82, 80, 80);
+}
+
+.subTitle1{
+    font-size: 35px;
+    color: rgb(82, 80, 80);
+}
+
+.subTitle2{
+    font-size: 25px;
+    color: rgb(60, 80, 104);
+}
+
+.footer{
+    font-size: 10px;
+    color: white;
+    margin-top: 20%;
+}
+
+/*
+
+
+
+
+
+*/

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <title>INDEX - UAV Fleet Management</title>
+    <link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ /> 
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="../dist/css/background.css">
+    
+    <link rel="stylesheet" href="../assets/css/index.css">
+
+    <script src="../bootstrap3/js/holder.js"></script>
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+</head>
+
+<body style="background-color: rgb(255, 255, 255);">
+
+    <nav class="navbar navbar-static-top navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <img src="../images/logo-V4.png" class="navbar-brand" style = "transform:scale(1.5)" alt="logo-white" />
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+  			    
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    EXPLORE<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Aerial Video</a></li>
+                    <li><a href="#">Aerial Photo</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    SUPPORT<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Technical Support</a></li>
+                    <li><a href="#">Online Support</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    HELP<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">About Safe Flight</a></li>
+                    <li><a href="#">About Our Project</a></li>
+                  </ul>
+                </li>
+  		    </ul>
+  
+
+          </div><!-- /.navbar-collapse -->
+          
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <nav class="navbar">
+        <div class="jumbotron ">
+        <div class="container">
+            <br/><br/><br/>
+        <h2 class="text-center textShadow">Welcome to UAV Fleet Management!</h2><br/><br/>
+        <p class="text-center textShadow" style="font-size: 15px; font-weight: 700;" > 
+            Comparing with single UAV, the UAV fleet has more advantages such as larger control areas, interactive cooperation and task allocation. <br/>
+            Therefore, clustering is a significant trend of the UAV development. </p><br/><br/>
+        <p class="text-center">
+            <button type="button" class="btn btn-primary button01" id="btn-login" >Log in</button>
+            <button type="button" class="btn btn-primary button01 button02" id="btn-register">Register</button>
+        </p>
+      </div>  
+      </div>
+    </nav>
+
+    <div class="row" >
+      <hr class="featurette-divider" >
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-md-4">  
+  
+        <a href="#" class="thumbnail">
+          <img src="../images/user&account.jpg" alt="...">
+        </a>
+
+      </div>
+
+      <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-0">
+          <p class = "subTitle1"> Same Account <span class="text-muted">for Web client and Android client.</span></p> 
+          <p class="subContents text-left"> 
+            When using the web version to perform formation path planning tasks, please log in to the same account on the app and the web.<br>
+            Use the app to link your UAV.</p> <br>
+          <button type="button" class="btn btn-primary button01" id="btn-download" >Download App</button>
+      </div>
+      <div class="col-md-2 "></div>
+    </div>
+
+    
+
+    <div class="row" style="background-color: rgba(217, 227, 236, 0.342);">
+      <hr class="featurette-divider">
+      <div class="col-xs-2 col-md-2 "></div>
+      <div class="col-xs-12 col-md-4">    
+        <a href="#" class="thumbnail">
+          <img src="../images/fleettask.jpg" alt="...">
+        </a></div>      
+      <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-0"> 
+        <p class = "subTitle1"> Create flight tasks <span class="text-muted">using the web client only.</span></p> 
+          <p class="subContents text-left"> 
+            The system automatically generates a path through these coordinates in order.
+            If it is a fleet task, the captain plans the route of the host.<br>
+            The system will automatically generate flight routes for other wingmen.<br>
+            Information such as flight time and route will be recorded in the database for easy viewing.<br></p> <br>
+      </div>      
+      <div class="col-xs-2 col-md-2"></div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-md-4 col-md-push-4">    
+        <a href="#" class="thumbnail">
+          <img src="../images/team.jpg" alt="...">
+        </a>
+      </div>
+      <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-pull-4 col-md-offset-0">  
+          <p class = "subTitle1"> Create a team <span class="text-muted">and natrually become the team manager.</span></p> 
+          <p class="subContents text-left"> 
+            The drone of the team manager defaults to the host.<br>
+            When creating a team, you can add players by searching for other usernames.<br>
+            Not all team members must participate in every mission.<br></p> <br>
+      </div>
+      <div class="col-md-2">    </div>
+    </div>
+
+    
+    <div class="row" style="background-color:  rgba(217, 233, 236, 0.342);">
+      <hr class="featurette-divider">
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-md-4 col-md-push-4">    
+        <a href="#" class="thumbnail">
+          <img src="../images/aboutus.jpg" alt="...">
+        </a>
+      </div>
+      <div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-pull-4 col-md-offset-0">
+          <p class="subContents text-left"><br>
+            This system is developed by the UNNC 2019 GRP-G05.<br>
+            In addition to the stated, some products or technologies mentioned herein may also be the interests of the following or other product suppliers.<br>
+            Microsoft, Windows, SQL Server, .net are registered trademarks of Microsoft corporation. <br>
+            Java is a registered trademark of SUN corporation. <br> 
+            MATRICE 200 SERIES V2 is a registered trademark of DJI corporation, which are used to be the test drones.<br>
+          </p>    
+       </div>          
+      <div class="col-md-2"></div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <footer class="container">
+      <br> <br> <br> 
+      <p class="text-right"><a href="#">Back to top</a></p>
+      <p class="text-right">© 2020 GRP-05 · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      <br> <br> <br> 
+    </footer>
+
+    <script type="text/javascript">
+    $("#btn-login").click(function (){
+  		window.location.href="login.html";
+  	});
+    $("#btn-register").click(function (){
+  		window.location.href="register.html";
+  	});
+    </script>
+</body>
+</html>

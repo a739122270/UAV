@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.nottingham.uav.mapper.AdmMapper">
+	<resultMap id="AdmEntityMap"
+		type="cn.nottingham.uav.entity.Administrator">
+		<id column="adm_id" property="admId"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="salt" property="salt"/>		
+		<result column="created_user" property="createdUser"/>
+		<result column="modified_time" property="modifiedTime"/>
+		<result column="created_time" property="createdTime"/>
+		<result column="modified_time" property="modifiedTime"/>
+	</resultMap>
+	
+	<!-- select user by name -->
+	<!-- Administrator findUserbyName(String username) -->
+	<select id="findUserByName"
+		resultMap="AdmEntityMap">
+		SELECT
+			adm_id,username,
+			password,salt
+		FROM
+			t_administrator
+		WHERE 
+			username=#{username}
+	</select>	
+</mapper>
+
+
+
+
+
+

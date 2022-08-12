@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+        /*The map title*/
+        
+        .BMap_bubble_title {
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 5px;
+            padding-top: 5px;
+            border-bottom: 1px solid gray;
+            background-color: #0066b3;
+        }
+        /* message content */
+        
+        .BMap_bubble_content {
+            background-color: white;
+            padding-left: 5px;
+            padding-top: 0px;
+            padding-bottom: 10px;
+            border-radius: 0px 0px 7px 7px;
+        }
+        /* content */
+        
+        .BMap_pop div:nth-child(9) {
+            top: 35px !important;
+            border-radius: 7px;
+        }
+        /* Top left delete button */
+        
+        .BMap_pop img {
+            top: 43px !important;
+            left: 215px !important;
+        }
+        
+        .BMap_top {
+            display: none;
+        }
+        
+        .BMap_bottom {
+            display: none;
+        }
+        
+        .BMap_center {
+            display: none;
+        }
+        /* Hidden corners */
+        
+        .BMap_pop div:nth-child(1) div {
+            display: none;
+        }
+        
+        .BMap_pop div:nth-child(3) {
+            display: none;
+        }
+        
+        .BMap_pop div:nth-child(5) {
+            display: none;
+        }
+        
+        .BMap_pop div:nth-child(7) {
+            display: none;
+        }
+        
+        .BMap_pop div:nth-child(8) {
+            margin-top: -25px;
+        }
+    </style>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WNmdqACk2mNa0oSeuK9NYPhCO4vAZhn1"></script>
+    <!--Load the mouse draw tool-->
+    <script type="text/javascript" src="//api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="//api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <!--Load the retrieval information window-->
+    <script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <title> TASK CREATION - UAV Fleet Management</title>
+    <link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ /> 
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+
+    <link rel="stylesheet" href="../assets/css/task-create.css">
+    <script src="../bootstrap3/js/holder.js"></script>
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+</head>
+
+<body class="is-preload">
+    <nav class="navbar navbar-static-top navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <img src="../images/logo-V4.png" class="navbar-brand" style="transform:scale(1.5)" alt="logo-white" />
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">INDEX</a></li>
+                    <li><a href="personal-homepage.html">DASHBOARD</a></li>
+                    <li><a href="http://localhost:3000">CHAT ROOM</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                FLIGHT TASK<span class="caret"></span>
+              </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="task-create.html">Task Creation</a></li>
+                            <li><a href="flight.html">Task In Progress</a></li>
+                            <li><a href="task-history.html">Task History</a></li>
+                        </ul>
+                    </li>
+                    <li class="active dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                SEARCH<span class="caret"></span>
+              </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="team-search.html">Team Search</a></li>
+                            <li><a href="user-search.html">User Search</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+					<li><a href="login.html">LOG OFF</a></li>
+                </ul>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+    </nav>
+
+    <!-- content -->
+    <div class="container-content ">
+
+     
+        <div class="map">
+            <div id="allmap" style="border-radius: 5px;"></div>
+        </div>
+
+
+        <!-- TASK (right) -->
+    
+      	<article class="container-task" style="width:600px;">
+          <div class="col-xs-12">
+            <form class="form-content" id="formCreateTask">
+              <h2> CREATE A TASK </h2>
+                <div id="error"></div>
+                <div class="fields">
+                    <div class="field half heightLimit">
+                        <label>Height limitation (m)</label>
+                        <input type="text" name="heightLimit" value="120" style="color:#B8B8B8" readonly="readonly" />
+                    </div>
+                    <div class="field half captain">
+                        <label>Captain</label>
+                        <input type="text" id="captain" name="captain" style="color:#B8B8B8" readonly="readonly" />
+                    </div>
+                    <div class="field uavType">
+                        <label>UAV type</label>
+                        <input type="text" name="uavType" id="uavType" style="width:65%;" readonly="readonly" />
+                        <input type="button" class="btn-set-type" id="btn-set-type" type="button" value="Set" style="float:right;width:30%;margin-top:-35px;"/>
+                    </div>
+
+                    <div class="field half uavAmount">
+                        <label>participants (1 - 16)</label>
+                        <input type="text" id="uavAmount" name="uavAmount" oninput="value=value.replace(/[^\d.]/g,'')" />
+                    </div>
+                    <div class="field half uavDistance">
+                        <label>Distance between UAVs (1 - 5)</label>
+                        <input type="text" id="uavDistance" name="uavDistance" oninput="value=value.replace(/[^\d.]/g,'')" value="" />
+                    </div>
+                    <div class="field half flightVelocity">
+                        <label>Flight velocity (m/s) (1 - 10)</label>
+                        <input type="text" id="uavVelocity" name="flightVelocity" oninput="value=value.replace(/[^\d.]/g,'')" value="" />
+                    </div>
+                    <div class="field half flightHeight">
+                        <label>Flight height (m) (5 - 120)</label>
+                        <input type="text" id="uavHeight" name="flightHeight" oninput="value=value.replace(/[^\d.]/g,'')" value="" />
+                    </div>
+
+                    <div class="field myLocation" style="display:none">
+                        <label>My Location</label>
+                        <input type="text" id="myLocation" name="myLocation" />
+                    </div>
+                    <div class="field half origin" style="display:none">
+                        <label>Origin</label>
+                        <input type="text" id="origin" name="origin" />
+                    </div>
+                    <div class="field half destination" style="display:none">
+                        <label>Destination</label>
+                        <input type="text" id="destination" name="destination" />
+                    </div>
+
+                    <div class="field formationType">
+                        <label>UAV formation type</label>
+                        <div style="float:left;margin-right:40px;">
+                            <img alt="" src="../images/liner.png" style="height:100px;height:100px;margin-bottom:8px;" />
+                            <label><input name="formationType" type="radio" value="1" checked/> Linear</label>
+                        </div>
+                        <div style="float:left;margin-right:40px;">
+                            <img alt="" src="../images/plane.png" style="height:100px;height:100px;margin-bottom:8px;" />
+                            <label><input name="formationType" type="radio" value="2" /> Plane</label>
+                        </div>
+                        <div style="float:left;margin-right:40px;">
+                            <img alt="" src="../images/cube.png" style="height:100px;height:100px;margin-bottom:8px;" />
+                            <label><input name="formationType" type="radio" value="3"/> Cube</label>
+                        </div>
+                    </div>
+                    <div class="field half estimatedTime" style="display:none">
+                        <label>Estimated time (mm:ss)</label>
+                        <input type="text" id="totalTime" name="totalTime" readonly="readonly" />
+                    </div>
+                    <div class="field half totalDistance" style="display:none">
+                        <label>Total Distance (m)</label>
+                        <input type="text" id="totalDistance" name="totalDistance" readonly="readonly" />
+                    </div>
+                </div>
+                <input type="button" class="btn-complete" id="btn-plan-route" value="PLAN ROUTE" />
+                <input class="btn-complete" type="button" id="btn-complete" value="COMPLETE" onClick="return toComplete()" style="display:none" />
+                <input type="button" class="btn-complete" id="btn-back" value="BACK" style="display:none">
+            </form>
+           </div>
+
+
+		  <div class="col-xs-12">
+            <form class="form-content prepare" id="formPrepareTask" style="display:none;">
+                <h2> TASK-PREPARE </h2>
+                <div class="fields">
+                    <div class="field half taskId">
+                        <label>task id</label>
+                        <input type="text" name="taskId" id="prepare-taskId" readonly="readonly" />
+                    </div>
+
+                    <div class="field half formationType">
+                        <label>formation type</label>
+                        <input type="text" name="formationType" id="prepare-formationType" readonly="readonly" />
+                    </div>
+                    
+                    <div class="field half uavAmount">
+                        <label>Required Participants</label>
+                        <input type="text" name="uavAmount" id="prepare-uavAmount" readonly="readonly" />
+                    </div>
+                    
+                    <div class="field half uavDistance">
+                        <label>Distance between UAV</label>
+                        <input type="text" name="uavDistance" id="prepare-uavDistance" readonly="readonly" />
+                    </div>
+
+                    <div class="field half origin">
+                        <label>Origin</label>
+                        <input type="text" name="origin" id="prepare-origin" readonly="readonly" />
+                    </div>
+                    <div class="field half destination">
+                        <label>Destination</label>
+                        <input type="text" name="destination" id="prepare-destination" readonly="readonly" />
+                    </div>
+
+                    <div class="field half estimatedTime">
+                        <label>Estimated time (hh:mm:ss)</label>
+                        <input type="text" name="totalTime" id="prepare-totalTime" readonly="readonly" />
+                    </div>
+                    <div class="field half totalDistance">
+                        <label>Total Distance (m)</label>
+                        <input type="text" name="totalDistance" id="prepare-totalDistance" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="field joiningMember">
+                    <label>Joining Member</label>
+                    <div class="members-content">
+                        <div id="members-list">
+                        </div>
+                        <div class="add-button-field">
+                            <input id="btn-add-member" type="button" style="display:none" value="Add new member" />
+                        </div>
+                    </div>
+                </div>
+                <input type="button" class="btn-complete" id="btn-delete" style="margin-left:10px" value="DELETE" />
+                <input type="button" class="btn-complete" id="btn-start" style="margin-left:10px" value="START" />
+                <input type="button" class="btn-complete" id="btn-send-all" style="width:40%; float:left" value="SEND TO OTHERS" />
+            </form>
+          </div>
+        </article>
+      </div>
+      
+      <!-- BG -->
+  	  <div id="bg"></div>
+
+    <!--*/ container-->
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+    <script>
+        function clearNoNum(obj) {
+            obj.value = obj.value.replace(/[^\d.]/g, ""); //Clear characters expect Numbers and "."   
+            obj.value = obj.value.replace(/^\./g, "");         
+            obj.value = obj.value.replace(/\.{2,}/g, ".");       
+            obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+        }
+
+
+        function toComplete() {
+            if ($("#uavType").val() == null ||
+                $("#uavAmount").val() == "" ||
+                $("#uavVelocity").val() == "" ||
+                $("#uavHeight").val() == "" ||
+                $("#uavDistance").val() == "") {
+                alert("Create error! This form is not complete.");
+                return false;
+            }
+
+            var uavAmount = $("#uavAmount").val()
+            var uavVelocity = $("#uavVelocity").val();
+            var uavHeight = $("#uavHeight").val();
+            var uavDistance = $("#uavDistance").val();
+
+            if  (uavVelocity < 1  ||  uavVelocity  >  10)  {
+                alert("The velocity of the UAVs should be in 1 - 10 m/s, please try again.");
+                return  false;
+            } 
+            else  if  (uavHeight < 5  ||  uavHeight  >  120)  {
+                alert("The height of the UAVs should be in 5 - 120 m, please try again.");
+                return  false;
+            } 
+            else  if  (uavAmount < 1  ||  uavAmount  >  16)  {
+                alert("The amount of the UAVs should be in 1 - 16, please try again.");
+                return  false;
+            } else  if  (uavDistance < 1  ||  uavDistance  >  5)  {
+                alert("The distance between the UAVs should be in 1 - 5 m, please try again.");
+                return  false;
+            } 
+        }
+    </script>
+
+    <script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    
+    	/*--------global variable ---------*/
+    	var joinedMemberNumber;
+    	var taskId;
+    
+    
+        (function($) {
+            $.fn.extend({
+                center: function() {
+                    return this.each(function() {
+                        $(this).css({
+                            position: 'absolute',
+                            left: 500 + 'px'
+                        });
+                    });
+                }
+            });
+        })(jQuery);
+
+        $('.map').hide();
+        $('.container-task').center();
+
+        $("#btn-plan-route").click(function() {
+
+            var uavAmount = $("#uavAmount").val()
+            var uavVelocity = $("#uavVelocity").val();
+            var uavHeight = $("#uavHeight").val();
+            var uavDistance = $("#uavDistance").val();
+            var Errormsg = document.getElementById("error")
+            if (uavAmount < 1  ||  uavAmount  >  16) {
+                Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px; opacity:0.85;' role='alert'>The amount of the UAVs should be in 1 - 16, please try again.</div>";
+            } else if (uavDistance < 1  ||  uavDistance  >  5) {
+                Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px; opacity:0.85;' role='alert'>The distance between the UAVs should be in 1 - 5 m, please try again.</div>";
+            } else if (uavVelocity < 1  ||  uavVelocity  >  10) {
+                Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px; opacity:0.85;' role='alert'>The velocity of the UAVs should be in 1 - 10 m/s, please try again.</div>";
+            } else if (uavHeight < 5  ||  uavHeight  >  120) {
+                Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px; opacity:0.85;' role='alert'>The height of the UAVs should be in 5 - 120 m, please try again.</div>";
+            } else {
+                Errormsg.innerHTML = "";
+                $(".container-task").animate({
+                    left: '820px'
+                }, 1500);
+                $(".map").delay(500).fadeIn(1500);
+                $(".btn-complete").attr("style", "display:block;float:left");
+                $("#btn-back").attr("style", "display:block;float:right;margin-right:150px;");
+                $(".estimatedTime").attr("style", "display:block;");
+                $(".totalDistance").attr("style", "display:block;");
+                $(".myLocation").show();
+                $(".origin").show();
+                $(".destination").show();
+
+                $("#btn-plan-route").hide();
+                $(".heightLimit").hide();
+                $(".captain").hide();
+                $(".formationType").hide();
+
+                init(); //generate map
+            }
+        });
+
+        //generate new task
+        $("#btn-complete").click(function() {
+            $.ajax({
+                "url": "/tasks/create_task",
+                "data": $("#formCreateTask").serialize(),
+                "type": "post",
+                "async": false,
+                "dataType": "json",
+                "success": function(json) {
+                    if (json.state == 20) {
+                        taskId = json.data;
+                    } else {
+                        alert(json.message);
+                    }
+                }
+            });
+
+            //keep wingman path
+            var uavAmount = $("#uavAmount").val();
+            var uavDistance = $("#uavDistance").val();
+            generateOtherPath(uavAmount, uavDistance, taskId);
+        });
+
+        //acquire taskId and judge if displaying task
+        $.ajax({
+            "url": "/users/get_taskId",
+            "data": null,
+            "type": "get",
+            "dataType": "json",
+            "async": false,
+            "success": function(json) {
+                if (json.state == 20) {
+                    taskId = json.data;
+                    if (taskId != null) {
+                        $("#formCreateTask").hide();
+                        $("#formPrepareTask").show();
+                        displayTask(taskId);
+
+                        window.setInterval(function(){
+                        	displayJoinedMembers(taskId);
+                        },2000);	
+                        
+                    }
+                } else {
+                    alert(json.message);
+                }
+            }
+        });
+
+        //display existing task
+        function displayTask(taskId) {
+            $.ajax({
+                "url": "/tasks/get_task_by_id",
+                "data": {
+                    "taskId": taskId
+                },
+                "type": "get",
+                "dataType": "json",
+                "success": function(json) {
+                    if (json.state == 20) {
+                        $("#prepare-taskId").val(json.data.taskId);
+                        $("#prepare-heightLimit").val(json.data.heightLimit);
+                        $("#prepare-captain").val(json.data.captain);
+                        $("#prepare-uavType").val(json.data.uavType);
+                        $("#prepare-uavAmount").val(json.data.uavAmount);
+                        $("#prepare-uavDistance").val(json.data.uavDistance);
+                        $("#prepare-flightVelocity").val(json.data.flightVelocity);
+                        $("#prepare-flightHeight").val(json.data.flightHeight);
+                        $("#prepare-origin").val(json.data.origin);
+                        $("#prepare-destination").val(json.data.destination);
+                        $("#prepare-totalDistance").val(json.data.totalDistance);
+                        $("#prepare-totalTime").val(json.data.totalTime);
+                        var formationType = json.data.formationType;
+                        if (formationType == 1) {
+                            $("#prepare-formationType").val("linear");
+                        } else if (formationType == 2) {
+                            $("#prepare-formationType").val("plane");
+                        } else if (formationType == 3) {
+                            $("#prepare-formationType").val("cube");
+                        }
+                    } else {
+                        alert(json.message);
+                    }
+                }
+            });
+        }
+
+        //go back
+        $("#btn-back").click(function() {
+            $(".map").fadeOut(1500);
+            $(".container-task").delay(500).animate({
+                left: '500px'
+            }, 1500);
+            $(".btn-complete").attr("style", "display:none");
+            $("#btn-back").attr("style", "display:none;");
+            $(".estimatedTime").attr("style", "display:none;");
+            $(".totalDistance").attr("style", "display:none;");
+            $(".myLocation").hide();
+            $(".origin").hide();
+            $(".destination").hide();
+
+            $("#btn-plan-route").show();
+            $(".heightLimit").show();
+            $(".captain").show();
+            $(".formationType").show();
+        });
+
+        //delete task
+        $("#btn-delete").click(function() {
+            var d = confirm("Do your want to delete this task?")
+            if (d == false) {
+                return false;
+            }
+            var taskId = $("#prepare-taskId").val();
+            $.ajax({
+                "url": "/tasks/delete_task",
+                "data": {
+                    "taskId": taskId
+                },
+                "type": "get",
+                "dataType": "json",
+                "success": function(json) {
+                    if (json.state == 20) {
+                        alert("Delete successfully!");
+                        window.location.reload();
+                    } else {
+                        alert(json.message);
+                    }
+                }
+            });
+        });
+        
+        
+        
+       
+       /*-------------------  button control------------------*/
+
+        $("#btn-send-all").click(function(){
+        	var taskId = $("#prepare-taskId").val();
+        	$.ajax({
+    			"url" : "/tasks/send_taskId",
+    			"data":{'taskId':taskId,'teamId':teamId},
+    			"type" : "get",
+    			"dataType" : "json",
+    			"success" : function(json) {
+    				if (json.state == 20) {
+    					alert("Send successfully!");
+    				} else {
+    					alert(json.message);
+    				}
+    			}
+    		});
+        })
+		// start project
+    	$("#btn-start").click(function() {
+    			if(joinedMemberNumber<Number($("#prepare-uavAmount").val())){
+    		    	alert("please wait until reach the required number of participants!");
+    			}else{
+    				$.ajax({
+    					"url": "/tasks/send_start",
+                		"data": {"taskId": taskId},
+                		"type": "get",
+                		"dataType": "json",
+                		"success" : function(json) {
+            				if (json.state == 20) {
+            					window.location.href = 'flight.html';
+            				} else {
+            					alert(json.message);
+            				}
+            			}
+    				})
+    			}
+        });
+        
+        
+
+      
+        var uavType = $.cookie("uavType");
+        $("#uavType").val(uavType);
+
+        //set uav type
+        $(".btn-set-type").click(function() {
+            window.location.href = "personal-homepage.html#uav";
+        });
+
+        
+        
+       var teamId;
+        /**** user info ajax *****/
+        $.ajax({
+            "url": "/users/get_by_userId",
+            "data": null,
+            "type": "get",
+            "dataType": "json",
+            "success": function(json) {
+                    if (json.state == 20) {
+                        // undefined -> ""
+                        var uavId = (json.data.uavId == undefined ? "" : json.data.uavId);
+                        teamId = (json.data.teamId == undefined ? "" : json.data.teamId);
+
+                        $("#captain").val(json.data.username);
+
+                    } else {
+                        alert(json.message);
+                    }
+                }         
+        });
+
+
+        var overlays = [];
+        var addressArray = [];
+        var polylines = [];
+        var map;
+        var sum;
+
+
+        function init() {
+            map = new BMap.Map("allmap"); // establish Map instance                        
+            map.enableScrollWheelZoom(); //Enable wheel zooming in and out
+
+
+            //acquire local position
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r) {
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                    getAddress(r.point);
+                    map.centerAndZoom(r.point, 15);
+                    addSelfControl(map);
+                    displayCityList(map);
+                } else {
+                    alert('failed' + this.getStatus());
+                    var point = new BMap.Point(116.404, 39.915); // generate point position
+                    map.centerAndZoom(point, 15);
+                    addSelfControl(map);
+                    displayCityList(map);
+                }
+            });
+
+            //Map overlay control
+            var overlaycomplete = function(e) {
+                overlays.push(e.overlay);
+                //add info window
+                var opts = {
+                    width: 210, 
+                    height: 125, 
+                    title: '<h4>' + "point" + overlays.length + '</h4>', // info window title
+                    enableMessage: true, //set eable to send message to info window
+                    message: ""
+                }
+                var point = e.overlay.point;
+
+                var geoc = new BMap.Geocoder();
+                geoc.getLocation(point, function(rs) {
+                    var addComp = rs.addressComponents;
+                    var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+                    addressArray.push(address);
+                    var infoWindow = new BMap.InfoWindow("Longitude: " + point.lng + "<br>Latitude: " + point.lat + "<br>Address: " + address, opts);            		
+                    map.openInfoWindow(infoWindow, point);
+
+                    e.overlay.addEventListener("click", function() {
+                        this.setAnimation(BMAP_ANIMATION_BOUNCE);
+                        map.openInfoWindow(infoWindow, this.point); 
+                    });
+
+                    e.overlay.addEventListener("onmouseout", function() {
+                        this.setAnimation();
+                        map.closeInfoWindow(infoWindow, this.point); 
+                    });
+                });
+
+                e.overlay.enableDragging(); //point can be draged
+                e.overlay.setAnimation(BMAP_ANIMATION_BOUNCE);
+                e.overlay.setAnimation(null);
+
+            };
+
+            var styleOptions = {
+                strokeColor: "red", 
+                fillColor: "red", 
+                strokeWeight: 3, 
+                strokeOpacity: 0.8,
+                fillOpacity: 0.6, 
+                strokeStyle: 'solid' 
+
+            }
+
+            //Instantiate the mouse drawing tool
+            var drawingManager = new BMapLib.DrawingManager(map, {
+                isOpen: false, 
+                enableDrawingTool: true, 
+                drawingToolOptions: {
+                    anchor: BMAP_ANCHOR_TOP_RIGHT, 
+                    offset: new BMap.Size(5, 5), 
+                    drawingModes: [BMAP_DRAWING_MARKER], 
+                },
+                circleOptions: styleOptions, 
+                polylineOptions: styleOptions, 
+                polygonOptions: styleOptions, 
+                rectangleOptions: styleOptions 
+            });
+
+            //add listener
+            drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+            //add self-defined control
+            addSelfControl(map);
+
+        }
+
+        function displayCityList(map) {
+            //city list
+            map.enableInertialDragging();
+            map.enableContinuousZoom();
+            var size = new BMap.Size(10, 20);
+            map.addControl(new BMap.CityListControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                offset: size,
+                // Events before switching cities
+                // onChangeBefore: function(){
+                //    alert('before');
+                // },
+                // Events after switching cities
+                onChangeAfter: function() {
+                    addSelfControl(map);
+                }
+            }));
+        }
+
+
+        //Add custom control methods
+        function addSelfControl(map) {
+
+            var cr = new BMap.CopyrightControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT
+            }); //set control position
+            map.addControl(cr); //add control
+
+            var bs = map.getBounds(); //Returns to the visible area of the map
+            cr.addCopyright({
+                id: 1,
+                content: "<div class='selfControl' style='margin-bottom:15px;'>" +
+                    "<input type='button' id='undoBtn' value='UNDO' onclick='clearLast()'/>" +
+                    "<input type='button' value='RESET' onclick='clearAll()'/>" +
+                    "<input type='button' value='PREVIEW' onclick='createPath()'/>" +
+                    "<input type='button' value='MODIFY' onclick='modifyPath()'/>" +
+                    "<input type='button' id='completeBtn' value='COMPLETE' onclick='savePath()'/>" +
+                    "</div>",
+                bounds: bs
+            });
+        }
+
+        //acquire addres，set address label
+        function getAddress(point) {
+            var gc = new BMap.Geocoder();
+            gc.getLocation(point, function(rs) {
+                var addComp = rs.addressComponents;
+                var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber; //acquire address
+                $("#myLocation").val(address);
+            });
+
+        }
+
+        //generate path
+        function createPath() {
+            sum = 0;
+            //clear all path before
+            for (var i = 0; i < polylines.length; i++) {
+                map.removeOverlay(polylines[i]);
+            }
+            polylines.length = 0
+            
+            for (var i = 0; i < overlays.length - 1; i++) {
+                var polyline = new BMap.Polyline(
+                    [
+                        overlays[i].point,
+                        overlays[i + 1].point
+                    ], {
+                        strokeColor: "blue",
+                        strokeWeight: 6,
+                        strokeOpacity: 0.5
+                    }
+                );
+
+                polylines.push(polyline);
+                map.addOverlay(polyline);
+
+                var distance = map.getDistance(overlays[i].point, overlays[i + 1].point) //acquire distance between two points
+
+                sum = sum + Number(distance);
+            }
+            sum = sum.toFixed(2);
+        }
+
+        //undo
+        function clearLast() {
+            if (overlays.length <= 0) {
+                return false;
+            }
+            map.removeOverlay(overlays[overlays.length - 1]);
+            overlays.length--;
+            if (polylines.length > 0) {
+                map.removeOverlay(polylines[polylines.length - 1]);
+                polylines.length--;
+            }
+        }
+
+        //reset
+        function clearAll() {
+            for (var i = 0; i < overlays.length; i++) {
+                map.removeOverlay(overlays[i]);
+            }
+            overlays.length = 0
+
+            for (var i = 0; i < polylines.length; i++) {
+                map.removeOverlay(polylines[i]);
+            }
+            polylines.length = 0
+        }
+
+        //save path
+        function savePath() {
+            createPath(overlays);
+            if (polylines.length == 0 || overlays.length == 0 || sum == 0) {
+                alert("Save error. Please create a path before");
+                return false;
+            } else {
+
+                for (var i = 0; i < overlays.length; i++) {
+                    var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                        anchor: new BMap.Size(11, 25),
+                        imageOffset: new BMap.Size(1, 0 - 11 * 25) // set img offset
+                    }); 
+                    overlays[i].setIcon(myIcon);
+                    console.log("longtitude：" + overlays[i].point.lng + ",latitude：" + overlays[i].point.lat);
+                    overlays[i].disableDragging();
+                }
+
+                //change origin picture
+                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                    anchor: new BMap.Size(11, 25),
+                    imageOffset: new BMap.Size(1, 0 - 10 * 25) 
+                }); 
+                overlays[0].setIcon(myIcon);
+
+                //change destination picture
+                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                    anchor: new BMap.Size(11, 25),
+                    imageOffset: new BMap.Size(1, 0 - 12 * 25) 
+                }); 
+                overlays[overlays.length - 1].setIcon(myIcon);
+
+                //set total distance
+                $("#totalDistance").val(sum);
+
+                //calculte all time
+                var velocity = $("#uavVelocity").val();
+                if (velocity != null) {
+                    var totalTime = (sum / velocity).toFixed(0);
+                    var hour = roundingDown((totalTime / 3600));
+                    var minute = roundingDown(((totalTime - hour * 3600) / 60));
+                    var second = (totalTime - hour * 3600 - minute * 60).toFixed(0);
+
+                    hour = addZero(hour);
+                    minute = addZero(minute);
+                    second = addZero(second);
+
+                    $("#totalTime").val(hour + " : " + minute + " : " + second);
+                }
+
+                $("#origin").val(addressArray[0]);
+                $("#destination").val(addressArray[addressArray.length - 1]);
+            }
+
+        }
+        //handler time data
+        function addZero(str) {
+            if (str.length < 2) {
+                var newStr = "0" + str;
+                return newStr;
+            } else {
+                return str;
+            }
+        }
+        //to decimal
+        function roundingDown(number) {
+            var str = number.toString();
+            var newStr = str.substring(0, str.lastIndexOf('.') + 1);
+            var newNumber = parseFloat(newStr).toFixed(0);
+            return newNumber;
+        }
+
+        //allow to modify
+        function modifyPath() {
+            for (var i = 0; i < overlays.length; i++) {
+                overlays[i].enableDragging();
+            }
+        }
+
+        //generate other paths
+        function generateOtherPath(uavNumber, distance, taskId) {
+
+            uavNumber = Number(uavNumber);
+
+            var allPath = [];
+            while (uavNumber > 0) {
+                var onePath = [];
+                for (var i = 0; i < overlays.length; i++) {
+                    var lng = overlays[i].point.lng;
+                    var lat = overlays[i].point.lat;
+                    lat = lat + (uavNumber - 1) * distance * 360 / (2 * Math.PI * 6377830);
+
+                    var position = [uavNumber, lng, lat];
+                    onePath[i] = position;
+                }
+                allPath[uavNumber - 1] = onePath;
+                uavNumber--;
+            }
+
+            $.ajax({
+                "url": "/points/add_point",
+                "data": {
+                    'allPathJson': JSON.stringify(allPath),
+                    'taskId': taskId
+                },
+                "type": "post",
+                "dataType": "json",
+                "success": function(json) {
+                    if (json.state == 20) {
+                        alert("Create successfully!");
+                        window.location.reload();
+                    } else {
+                        alert(json.message);
+                    }
+                }
+            });
+        }
+        
+        /*****  task joined member list ajax   *****/
+    	function displayJoinedMembers(taskId){
+        	$(".member-info").remove();
+    		$.ajax({
+    			"url" : "/tasks/get_joined_members",
+    			"data" : {'taskId':taskId},
+    			"type" : "get",
+    			"dataType" : "json",
+    			"async":false,
+    			"success" : function(json) {
+    				if (json.state == 20 && json.data !=null) {
+    					var list = json.data;
+    					joinedMemberNumber = list.length;
+    					
+    					for(var i=0;i<list.length;i++){
+    						var div = "<div class='member-info' id='member-info' style='margin-bottom:10px;'>"+
+    		                				"<div style='float:left'>"+
+    		                  					"<img id='img-member-avatar1' style='width:30px; height:30px; border-radius:50%; border:solid 1.5px #FFFFFF;margin:2px 0px 2px 10px;' src='#{avatar}' class='img-responsive' />"+   		               				    		                  			
+    		                  				"</div>"+
+    		                				"<p style='margin-left:50px;padding-top:6px;'><a href='#'>Name: #{username}</a>"+	                  		
+    		                				"&nbsp&nbsp Email: #{email}</p>"+ 
+    		                				"<img class='#{userId}' id='img-ready' style='width:30px; height:30px;float:right;margin:-32px 0px 2px 10px;' src='../images/ready.png'  />"+
+    		              			  "</div>";
+    		              			     		              			             		              	
+    		              	div = div.replace("#{avatar}", list[i].avatar);
+    		            	div = div.replace("#{username}", list[i].username);
+    		            	div = div.replace("#{email}", list[i].email);
+    		            	div = div.replace("#{userId}", list[i].userId);
+    		            	div = div.replace("#{memberId}", list[i].userId);    		            	   		            	
+    		              	$("#members-list").append(div);
+    		              	
+    		              	var joinedMember = $.cookie("joinedMember"+list[i].userId);
+    		              	if(joinedMember != null){
+    		              		$("."+joinedMember).show();
+    		              	}   
+    					}
+    				}
+    			}
+    		});
+    	}
+        
+    </script>
+    
+    <script type="text/javascript">
+	var websocket = null;
+	
+	var userId=$.cookie("userId");
+	
+	async function establishWebSocket(){
+
+	    if('WebSocket' in window){
+	        websocket = new WebSocket("ws://localhost:8080/websocket/"+ userId + "_web");
+	    }
+	    else{
+	        alert('Not support websocket')
+	    }
+	    
+	    await new Promise((resolve) =>{
+	    	websocket.onopen = function(e){
+	    		resolve(e.data);
+	    	};
+	    });
+	}
+	
+	establishWebSocket();
+
+    websocket.onerror = function(){
+        //setMessage("connect error");
+    };
+
+    websocket.onopen = function(event){
+        //setMessage("open");
+    }
+
+    websocket.onmessage = function(event){
+        setMessage(event.data);
+    }
+
+    websocket.onclose = function(){
+        //setMessage("close");
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+  
+    function setMessage(message){
+    	if(message.indexOf(";") != -1 && !isNaN(message.substr(0, 1))){
+    		var s =[];
+        	s = message.split(";");
+	    	switch(s[0]){
+	    		case("1"):
+	    			var s =[];
+	        		s = message.split(";");
+	            	var result = confirm(s[s.length-1]); 
+	            	websocket.send(message+";"+result);	            		            	
+	            	
+	    		case("4"):
+	    			$("."+s[2]).show(); 
+	    			$.cookie("joinedMember"+s[2], s[2], {
+                    	"expires": 7
+                	});
+    		}   		
+    	}else{
+    		alert(message);
+    	}
+    }
+
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+</script>
+</body>
+
+</html>

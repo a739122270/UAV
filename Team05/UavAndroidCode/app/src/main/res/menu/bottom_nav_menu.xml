@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_selector"
+        android:title="TEAM" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/dash_selector"
+        android:title="MY UAV" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/noti_selector"
+        android:title="ME" />
+
+</menu>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <title>REGISTER - UAV Fleet Management</title>
+    <link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ /> 
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+
+    <script src="../bootstrap3/js/holder.js"></script>
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+
+    <style>
+        /*web background*/
+        
+        .container {
+            display: table;
+            height: 100%;
+        }
+        
+        .row {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* centered columns styles */
+        
+        .row-centered {
+            text-align: center;
+        }
+        
+        .col-centered {
+            display: inline-block;
+            float: none;
+            text-align: left;
+            margin-right: -4px;
+        }
+        
+        .textShadow {
+            text-shadow: rgb(145, 138, 138) 3px 4px 5px
+        }
+    </style>
+
+
+</head>
+
+
+<body style="background-image: url(../images/bg4.jpg);">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4 row-centered ">
+                <a href="index.html">
+                <img src="../images/logo-log3.png" alt="logo" style="width: 70%; margin: 20%;" />
+            </a>
+            </div>
+
+            <div class="col-xs-12 col-md-4 col-centered row-centered ">
+                <h3 style="color: black;">Register</h3>
+                <a href="login.html" class="text-center">Register completed,
+					back to log in.</a> <br>
+                <br>
+                <form id="form-reg">
+                    <div id="error"></div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username"> <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email"> <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" id="phone" placeholder="Telephone" name="phone" oninput="value=value.replace(/[^\d]/g,'')"> <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password"> <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" id="Rpassword" placeholder="Confirm password" name="Rpassword"> <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="checkbox icheck" style="float: left;">
+                        <label id="terms-label"> <input type="checkbox"
+							value="true" name="agree"> <span style="color: white;">I
+								agree to the <a href="https://www.dji.com/terms" target="_blank">terms</a>
+						</span>
+						</label>
+                    </div>
+                    <input type="button" id="btn-reg" class="btn btn-primary btn-block btn-flat" style="float: right;" value="Register">
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+
+
+
+    <!-- AJAX -->
+    <script type="text/javascript">
+        $("#btn-reg")
+            .click(
+                function() {
+                    var Errormsg = document.getElementById("error")
+                    var username = document.getElementById("username")
+                    var email = document.getElementById("email")
+                    var phone = document.getElementById("phone")
+                    var password = document.getElementById("password")
+                    var Rpassword = document.getElementById("Rpassword")
+
+                    if (username.value.length > 20 || username.value.length < 6) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Please enter 6-20 characters for username.</div>";
+                    } else if ((email.value.length == 0)) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Please enter your email.</div>";
+                    } else if ((phone.value.length == 0)) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Please enter your phone number.</div>";
+                    } else if ((password.value.length == 0)) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Please enter password.</div>";
+                    } else if ((password.value != Rpassword.value)) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Second Password does not match.</div>";
+                    } else if (!$("input[type='checkbox']").is(
+                            ':checked')) {
+                        Errormsg.innerHTML = "<div class='alert alert-danger' style='padding:8px 12px 8px 12px;' role='alert'>Please agree to the term first.</div>";
+                    } else {
+                        Errormsg.innerHTML = "";
+                        $
+                            .ajax({
+                                "url": "/users/reg",
+                                "data": $("#form-reg").serialize(),
+                                "type": "post",
+                                "dataType": "json",
+                                "success": function(json) {
+                                    if (json.state == 20) {
+                                        alert("Register successfully！");
+                                        window.location.href = 'login.html';
+                                    } else {
+                                        alert(json.message);
+                                    }
+                                }
+                            });
+                    }
+                });
+    </script>
+    <!-- /.AJAX -->
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+    <!-- /.jQuery -->
+</body>
+
+</html>

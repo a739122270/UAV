@@ -1,0 +1,245 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
+
+
+
+
+.navbar{
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    background-color: white;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    /*background-color:  rgb(210, 226, 241);;*/
+    background-image:none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: rgb(79, 119, 158);
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.pageBackground{
+	background-image: linear-gradient(to bottom, rgba(19, 21, 25, 0.2), rgba(19, 21, 25, 0.2)), url("../../images/bg4-trans.png");
+
+}
+
+label {
+    color: #ffffff;
+    display: block;
+    font-size: 1.16rem;
+    font-weight: 400;
+    letter-spacing: 0.2rem;
+    line-height: 1.5;
+    margin: 0 0 1.3rem 0;
+    text-transform: uppercase;
+} 
+
+
+
+h2{
+	border-bottom: solid 1px #ffffff;
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: -ms-max-content;
+    width: max-content;
+    padding-bottom: 0.5rem;
+    margin: 0 0 3rem 0;
+    font-weight: 400;
+	font-size: 2.4rem;
+    line-height: 1.4;
+    letter-spacing: 0.5rem;
+    color: #ffffff;
+}
+
+.search {
+    height: 35px;
+    width: 200px;
+    margin-top: -5px;
+}
+
+.logowhite {
+    width: 5px;
+}
+
+.container-content {
+	position: absolute;
+    width: 90%;
+    /*min-height: 700px;*/
+    margin: 0 auto;
+    z-index: 5;
+}
+
+#allmap {
+    float: right;
+    width: 100%;
+    height: 705px;
+    background-color:  rgb(79, 119, 158,0.4);
+    float: left;
+   /* margin: 120px 0 0 40px;*/
+    border-radius: 6px;
+}
+
+.container-task {
+	transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
+    padding: 4.5rem 2.5rem 1.5rem 2.5rem;
+    position: relative;
+    width: 40rem;
+    max-width: 100%;
+    background-color: rgba(29, 132, 211, 0.0);
+    border-radius: 4px;
+}
+
+.title-task {
+    font-size: 25px;
+    text-align: center;
+    border-bottom: white 1px solid;
+    width: 150px;
+}
+
+.form-content {
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.button-viewmore {
+    font-size: 12px;
+    background-color: transparent;
+    box-shadow: none;
+    border-color: #DCDCDC;
+    color: white;
+    border-radius: 4px;
+    width: 80px;
+    height: 30px;
+}
+
+.button-viewmore:hover,
+.button-viewmore:active,
+.button-viewmore.hover {
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    border-color: #DCDCDC;
+    border-radius: 4px;
+    width: 80px;
+    height: 30px;
+}
+
+.texts {
+    height: 28px;
+    width: 150px;
+}
+
+.float-right {
+    float: right;
+}
+
+.btn-complete {
+    float:right;
+    background-color: rgb(79, 119, 158);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+}
+
+.btn-complete:hover,
+.btn-complete:active,
+.btn-complete.hover {
+    border-radius: 5px;
+    background-color: rgb(117, 140, 163);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+}
+
+.selfControl input[type="button"]{
+	border-color: #FFFFFF;
+	
+	border:0px;
+	
+	border-left: 1px solid #C6C6C6;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	
+	background-color:#FFFFFF;
+	opacity:0.95;
+	color: rgb(79, 119, 158);
+	font-weight:bold;
+	height:40px;
+	
+	padding-left:10px;
+	padding-right:10px;
+	
+	box-shadow: 0 2px 0 0 rgba(0,0,0,0.15);
+}
+
+#undoBtn{
+	border-left: 1px solid black;
+	border-radius: 4px 0px 0px 4px;
+}
+
+#completeBtn{
+	border-right: 1px solid black;
+	margin-right: 5px;
+	border-radius: 0px 4px 4px 0px;
+}
+
+
+
+
+
+
+progress {
+    border: 0;
+    background-color: white;
+    color: rgb(235, 207, 156);
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 90%;
+    height: 5px;
+}
+
+progress::-moz-progress-bar {
+    background: rgb(235, 207, 156);
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+    background: white;
+}
+
+progress::-webkit-progress-value {
+    background: rgb(235, 207, 156);
+}
+
+.table-member {
+    width: 100%;
+    text-align: center;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    color: #DCDCDC;
+}

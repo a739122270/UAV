@@ -1,0 +1,106 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");*/
+
+/* Basic */
+
+
+
+    html, body {
+        min-width: 320px;
+    }
+
+
+/* Type */
+
+html {
+    font-size: 16pt;
+}
+
+    @media screen and (max-width: 1680px) {
+
+        html {
+            font-size: 12pt;
+        }
+
+    }
+
+    @media screen and (max-width: 736px) {
+
+        html {
+            font-size: 11pt;
+        }
+
+    }
+
+    @media screen and (max-width: 360px) {
+
+        html {
+            font-size: 10pt;
+        }
+
+    }
+
+	h1 {
+		font-size: 3.5rem;
+		line-height: 1.3;
+		letter-spacing: 0.4rem;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		line-height: 1.4;
+		letter-spacing: 0.5rem;
+	}
+
+	h3 {
+		font-size: 1rem;
+	}
+
+	h4 {
+		font-size: 0.8rem;
+	}
+
+	h5 {
+		font-size: 0.7rem;
+	}
+
+	h6 {
+		font-size: 0.6rem;
+	}
+
+	@media screen and (max-width: 736px) {
+
+		h1 {
+			font-size: 1.75rem;
+			line-height: 1.4;
+		}
+
+		h2 {
+			font-size: 1.25em;
+            line-height: 1.5;
+            letter-spacing: 0.1rem;
+		}
+
+    }
+    
+    .container {
+        display: table;
+        height: 100%;
+    }
+    
+    .row {
+        display:table-cell;
+        vertical-align: middle;
+    }
+    /* centered columns styles */
+    
+    .row-centered {
+        text-align: center;
+    }
+    
+    .col-centered {
+        display: inline;
+        float: none;
+        text-align: right;
+        margin-right: -4px;
+    }

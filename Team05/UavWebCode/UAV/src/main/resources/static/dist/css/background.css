@@ -1,0 +1,115 @@
+#bg{
+	background-image: url("../../images/bg.jpg");
+	background-position: center;
+	background-repeat: no-repeat;	
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
+	
+}
+#bg4{
+	background-image: url("../../images/bg4.jpg");
+	background-position: center;
+	background-repeat: no-repeat;	
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 1;
+	
+}
+
+#bg2 {		
+	background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
+	background-position: center;
+	background-repeat: no-repeat;
+    width: 100%;
+    height: 120vh;
+    filter:blur(10px);
+	z-index: 2;
+}
+
+#auto-label span,#terms-label span{
+	color:#ffffff;
+	font-size:14px;
+	padding-left:10px;
+}
+#terms-label a{
+	font-weight:bold;
+	font-size:14px;
+}
+.icheckbox_square-blue{
+	border-radius:3px;
+}
+#boundary{
+	color:#ffffff;
+}
+h3{
+	color:white;
+}
+.login-box-body,.register-box-body{
+	background-color:#4D4D4D;
+	opacity:0.8;
+	border-radius: 6px;
+}
+
+input[type="text"],input[type="password"],input[type="email"]{
+	border-radius: 4px;
+	border: solid 1px #ffffff;
+	color: #ffffff;
+	background-color: transparent;
+	
+}
+
+#btn-login,#btn-reg{
+	border-radius: 3px;
+}
+#btn-login:hover,#btn-reg:hover{
+	border-radius: 3px;
+    background-color: #429CD0;
+    border-color:#429CD0;
+}
+
+input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus{
+	border: solid 1.5px #ffffff;	
+}
+
+input[type="text"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder{
+	color:white;
+}
+input[type="text"]:-moz-placeholder,
+input[type="password"]::-moz-placeholder,
+input[type="email"]::-moz-placeholder{
+	color:white;
+}
+input[type="text"]:-ms-input-placeholder,
+input[type="password"]::-ms-input-placeholder,
+input[type="email"]::-ms-input-placeholder{
+	color:white;
+}
+
+.btn.btn-flat {
+	 border-radius: 4px;
+}
+.btn-facebook:hover {
+    color: #fff;
+    background-color: #4568B2;
+    border-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+.btn-google:hover{
+    color: #fff;
+    background-color: #EC503D;
+    border-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+.text-center{
+	font-weight:bold;
+}
+
+
+		

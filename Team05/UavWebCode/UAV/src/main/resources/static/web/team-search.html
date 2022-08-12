@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<title>TEAM SEARCH - UAV Fleet Management</title>
+<link rel='icon' href='../images/logo-V4.png' type=‘image/x-ico’ />
+
+<link rel="stylesheet"
+	href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="../assets/css/search-result.css">
+<link rel="stylesheet" href="../assets/css/team-search.css">
+
+
+<script src="../bootstrap3/js/holder.js"></script>
+<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+<script src="../bootstrap3/js/bootstrap.js"></script>
+
+
+
+</head>
+
+<body class="pageBackground">
+
+	<nav class="navbar navbar-static-top navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<img src="../images/logo-V4.png" class="navbar-brand"
+					style="transform: scale(1.5)" alt="logo-white" />
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">UFM</a></li>
+					<li><a href="personal-homepage.html">DASHBOARD</a></li>
+					<li><a href="http://localhost:3000">CHAT ROOM</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> FLIGHT TASK<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="task-create.html">Task Creation</a></li>
+							<li><a href="flight.html">Task In Progress</a></li>
+							<li><a href="task-history.html">Task History</a></li>
+						</ul></li>
+					<li class="active dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false"> SEARCH<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="team-search.html">Team Search</a></li>
+							<li><a href="user-search.html">User Search</a></li>
+						</ul></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><div id="search-field">
+							<input type="button" class="btn-search" id="btn-search" /> <input
+								type="text" class="search"
+								placeholder=" Search team by id or name:">
+						</div></li>
+					<li><a href="login.html">LOG OFF</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<div class="container">
+		<!--the first row: title-->
+		<div class="row">
+			<div class="col-xs-12 col-md-5 col-centered">
+				<input class="btn-set-type" style="float: right; margin-right: 1%;"
+					id="btn-set-type" type="button" value="Set" /> <input type="text"
+					value=""
+					style="float: right; width: 50%; border-radius: 3px; border: solid 1px rgb(79, 119, 158); color: rgb(79, 119, 158); text-align: center; font-family: ' Source Sans Pro '; font-size: 1.8px; line-height: 2.1;"
+					placeholder="UAV Type" name="uavId" id="uavType"
+					readonly="readonly" /> <br>
+				<h1 style="font-weight: 900;">
+					SEARCH FOR<br>A TEAM
+				</h1>
+
+				<div class="col-md-7" style="float: right;">
+					<form id="form-team-search-condition">
+
+						<table>
+							<tr>
+								<td>TEAM ID</td>
+								<td style="width: 50px;"><label><input
+										name="search-condition" type="radio" value="team_id" checked /></label></td>
+							</tr>
+							<tr>
+								<td>NUMBER OF MEMBERS</td>
+
+								<td style="width: 50px;"><label><input
+										name="search-condition" type="radio" value="max_member_number" />
+								</label></td>
+							</tr>
+							<tr>
+								<td>DESC</td>
+
+								<td style="width: 50px;"><label><input
+										name="search-order" type="radio" value="DESC" checked /></label></td>
+							</tr>
+							<tr>
+								<td>ASC</td>
+
+								<td style="width: 50px;"><label> <input
+										name="search-order" type="radio" value="ASC" /></label></td>
+							</tr>
+
+						</table>
+
+
+						<!--label style="font-weight: 100;"><input name="search-condition" type="radio" value="team_id" checked/> ORDER BY TEAM ID </label>
+            			<label style="font-weight: 100;"><input name="search-condition" type="radio" value="max_member_number" /> ORDER BY MEMBER NUMBER </label>
+           	 			<br><br><br>
+              			<label style="margin-left:-80px;"><input name="search-order" type="radio" value="DESC" checked/> DESC </label>
+                		<label style="margin-left:50px;"><input name="search-order" type="radio" value="ASC" /> ASC </label-->
+						<br> <input class="btn-search-team" type="button"
+							value="Search"> <br>
+						<br> <input class="btn-clear"
+							style="background-color: white; color: rgb(79, 119, 158);"
+							type="button" value="Clear">
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="team-search-box-body main-content"
+			style="margin-top: 50px;">
+			<div class="team-info"></div>
+			<!--team info-->
+		</div>
+		<!--search body-->
+	</div>
+	<!--container-->
+
+
+
+
+	<!-- jQuery -->
+	<script src="../bower_components/jquery/dist/jquery.min.js "></script>
+	<script src="../plugins/iCheck/icheck.min.js "></script>
+	<script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+	<!-- /.jQuery -->
+
+	<!-- AJAX -->
+	<script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=2.0&ak=WNmdqACk2mNa0oSeuK9NYPhCO4vAZhn1"></script>
+	<script type="text/javascript">
+    
+    
+    /*****  uav type ajxa  *****/
+    $.ajax({
+    	"url":"/uavs/get_uav_type_by_userId",
+		"data":null,
+		"type":"get",
+		"dataType":"json",
+		"success":function(json) {
+			if(json.data != null && json.state == 20){
+      			$("#uavType").val(json.data.levelName);  
+			}
+		}
+    });
+   
+    $(".btn-set-type").click(function(){
+		window.location.href="personal-homepage.html#uav";
+  	});
+    
+    $(".btn-clear").click(function(){
+		$("#uavType").val("");
+  	});
+    
+
+    
+    /****  team search ajax  ****/
+    $(".btn-search-team").click(function(){
+    	var uavType=$("#uavType").val(); 
+    	var condition = $('input[name="search-condition"]:checked').val();
+    	var order = $('input[name="search-order"]:checked').val();
+    	if(uavType != ""){
+    		searchTeamByUavType(uavType,condition,order);
+    	}else{
+    		searchTeamByCondition(condition,order)
+    	}
+    });
+    
+    //directly display all teams
+    showAllTeams();
+    function showAllTeams(){
+    	var condition = $('input[name="search-condition"]:checked').val();
+    	var order = $('input[name="search-order"]:checked').val();
+    	searchTeamByCondition(condition,order);
+    }
+    
+    
+    
+    function searchTeamByUavType(uavType,condition,order){	
+    	$.ajax({
+    	    "url":"/teams/search_teams_by_type",
+    		"data":"uavType="+uavType+"&condition="+condition+"&order="+order,
+    		"type":"get",
+    		"dataType":"json",
+    		"success":function(json) {
+    			if(json.state == 20){ 
+        			displayTeamInfo(json.data);
+    			}
+    		}
+    	});
+    }
+    
+    function searchTeamByCondition(condition,order){	
+    	$.ajax({
+    	    "url":"/teams/search_teams_by_condition",
+    		"data":"condition="+condition+"&order="+order,
+    		"type":"get",
+    		"dataType":"json",
+    		"success":function(json) {
+    			if(json.state == 20){ 	  				
+        			displayTeamInfo(json.data);
+    			}
+    		}
+    	});
+    }
+     
+    
+    function getMemberNumberByTeamId(teamId){
+    	var result;
+    	$.ajax({
+			"url" : "/teams/get_users_list",
+			"data" : 'teamId='+teamId,
+			"async" : false,
+			"type" : "get",
+			"dataType" : "json",
+			"success" : function(json) {
+				if (json.state == 20) {
+					result = json.data.length;
+				}
+			}
+    	});
+    	return result;
+    }
+    
+    function getUavTypeById(uavId){
+    	var result;
+    	$.ajax({
+			"url" : "/uavs/get_uav_type",
+			"data" : 'id='+uavId,
+			"async" : false,
+			"type" : "get",
+			"dataType" : "json",
+			"success" : function(json) {
+				if (json.state == 20 && json.data !=null) {
+					result = json.data.levelName;
+				}
+			}
+    	});
+    	return result;
+    }
+    
+    
+    /**** join a team ajax *****/
+	function joinTeam(teamId) {
+		$.ajax({
+			"url" : "/teams/join",
+			"data":{'teamId': teamId},
+			"type" : "post",
+			"dataType" :"json",
+			"success" : function(json) {
+				if (json.state == 20) {
+					alert("Join successfully");
+					window.location.href="personal-homepage.html#team";
+				} else {
+					alert(json.message);
+				}
+			}
+		});
+	}
+    
+    /****  search team by teamId or teamName  *****/
+    $("#btn-search").click(function(){
+    	var searchCondition = $(".search").val();
+    	if(searchCondition != ""){
+    		if(!isNaN(searchCondition)){
+    			searchTeamByTeamId(searchCondition);
+    		}else{
+    			searchTeamByTeamName(searchCondition);
+    		}
+    	}
+    });
+    
+    function searchTeamByTeamId(teamId){
+    	$.ajax({
+			"url" : "/teams/search_team_by_teamId",
+			"data":{'teamId': teamId},
+			"type" : "get",
+			"dataType" :"json",
+			"success" : function(json) {
+				if(json.state ==20 ){
+					displayTeamInfo(json.data);
+				}else{
+					alert(json.message);
+				}
+			}
+    	});
+    }
+    
+    function searchTeamByTeamName(teamName){
+    	$.ajax({
+			"url" : "/teams/search_teams_by_teamName",
+			"data":{'teamName': teamName},
+			"type" : "get",
+			"dataType" :"json",
+			"success" : function(json) {
+				if(json.state ==20 ){
+					displayTeamInfo(json.data);
+				}else{
+					alert(json.message);
+				}
+			}
+    	});
+    }	
+    
+    //calculate distance between two citys
+    function getCityDistance(cityName1,cityName2){
+    	var point1;
+    	var point2;
+    	$.ajax({
+			"url" : "/teams/get_city_coordinate",
+			"data":{'cityName': cityName1},
+			"type" : "get",
+			"async" : false,
+			"dataType" :"json",
+			"success" : function(json) {
+				if(json.state ==20 ){
+					var coordinate = [];
+					coordinate = json.data;					
+					point1 = new BMap.Point(coordinate[0],coordinate[1]);
+				}else{
+					alert(json.message);
+				}
+			}
+    	});  
+    	
+    	$.ajax({
+			"url" : "/teams/get_city_coordinate",
+			"data":{'cityName': cityName2},
+			"type" : "get",
+			"async" : false,
+			"dataType" :"json",
+			"success" : function(json) {
+				if(json.state ==20 ){
+					var coordinate = [];
+					coordinate = json.data;
+					point2 = new BMap.Point(coordinate[0],coordinate[1]);
+				}else{
+					alert(json.message);
+				}
+			}
+    	}); 
+    	
+    	var map = new BMap.Map();
+        var distance=map.getDistance(point1,point2)  //acquire distance
+        return distance;
+    }
+    
+    async function displayTeamInfo(list){
+    	$(".team-table").remove();
+		$(".no-record-head").remove();
+    	if(list == null){
+			var div="<div class='team-table' id='h4'><br><br>"+
+						"<div class='row'>"+
+						"<div class='teaminfo-left col-xs-12 col-md-4 '>"+
+							"<table><tr><th> No relevant record. </th></tr></table></div>"+       
+							"<div class='teaminfo-right col-xs-12 col-md-4'></div>"+  
+							"<div class='col-xs-12 col-md-4' style='float:right;'><br><br><br></div>"+
+						"</div>     <!--row-->     </div>";
+			$(".team-info").append(div);
+		}else{
+			for(var i=0;i<list.length;i++){
+				var h = "<div class='team-table' id='h4'><br><br>"+
+							"<div class='row'>"+
+							"<div class='teaminfo-left col-xs-12 col-md-4 '>"+
+								"<table><tr><th > Loading... </th></tr></table></div>"+       
+								"<div class='teaminfo-right col-xs-12 col-md-4'></div>"+  
+								"<div class='col-xs-12 col-md-4' style='float:right;'><br><br><br></div>"+
+								"</div>     <!--row-->     </div>";
+				$(".team-info").append(h);
+				
+				var div ="<div  class='team-table'>"+
+				"<div class = 'row'>"+
+				"<label class='team-name'>#{teamName}</label>"+
+				"<br><br>"+
+				
+    			"<div class='teaminfo-left col-xs-12 col-md-2'>"+
+    				"<table>"+
+        				"<tr>"+
+							"<td>TEAM ID: </td>"+
+								"<td>&nbsp;&nbsp;#{teamId}</td>"+
+        				"</tr>"+
+        				"<tr>"+
+          					"<td>OWNER: </td>"+
+          					"<td>&nbsp;&nbsp;#{owner}</td>"+
+        				"</tr>"+
+        				"<tr>"+
+          					"<td>MEMBER: </td>"+
+          					"<td>&nbsp;&nbsp;#{memberNumber}/#{maxMemberNumber}</td>"+
+        				"</tr>"+                                
+     				"</table>"+  
+				"</div>"+           
+				
+				"<div class='teaminfo-right col-xs-12 col-md-2'>"+
+				"<table>"+
+					"<tr>"+
+						"<td>UAV TYPE: </td>"+
+          				"<td>&nbsp;#{uavType}</td>"+
+					"</tr>"+
+    				"<tr>"+
+      					"<td>FlIGHT AREA: </td>"+
+      					"<td>&nbsp;#{flightArea}</td>"+
+    				"</tr>"+
+    				"<tr>"+
+  						"<td>DISTANCE:</td>"+
+  						"<td>&nbsp;#{distance}</td>"+
+					"</tr>"+	                                   
+ 				"</table>"+  
+		 
+			"<div class='col-xs-12 col-md-6' style='float:right;'>"+
+  					"<button class='button-join' onclick='joinTeam(#{Id})' type='button'>JOIN</button>"+
+			"</div> "+    
+			"</div> "+   
+			"</div> <br>"+  
+		"<div>"
+	        		
+	        	var uavType = 	getUavTypeById(list[i].uavId);
+	        	var	memberNumber = getMemberNumberByTeamId(list[i].teamId);
+	        	
+	        	div = div.replace("#{teamName}", list[i].teamName);
+	        	div = div.replace("#{uavType}", uavType);
+	        	div = div.replace("#{owner}", list[i].owner);
+	        	div = div.replace("#{Id}", list[i].teamId);
+	        	div = div.replace("#{teamId}", list[i].teamId);
+	        	div = div.replace("#{memberNumber}", memberNumber);
+	        	div = div.replace("#{maxMemberNumber}", list[i].maxMemberNumber);
+	        	div = div.replace("#{flightArea}", list[i].flightArea);     	
+	        	
+	        	var distance;
+				await getDistance(1,list[i].flightArea).then(function(data){
+	        		div = div.replace("#{distance}",data);
+	        		distance = data;
+	        	});
+	        	
+	        	$(".team-info").append(div);
+	        	$("#h4").remove();
+	        
+			}  		
+		}	
+    }
+    
+    
+    function getDistance(ms,cityName){
+       	  return new Promise((resolve) => {
+       	    setTimeout(()=>{
+       	    	var distance;
+       	     	var geolocation = new BMap.Geolocation();
+ 	    		geolocation.getCurrentPosition(function(r){
+                 	if(this.getStatus() == BMAP_STATUS_SUCCESS){                	
+	                	var gc = new BMap.Geocoder();            	
+	                    gc.getLocation(r.point, function(rs){
+	                        var addComp = rs.addressComponents;
+	                        var location = addComp.city;
+	                        distance = (getCityDistance(cityName,location)/1000).toFixed(1); 	//m转化为km	                       
+	                        resolve(distance+"km");
+	                    });                    
+                 	}else {
+                     	alert('failed'+this.getStatus());
+                 	}
+             	});
+       	    },ms);
+       	  });      	    	     	
+    }
+     
+    </script>
+
+	<script type="text/javascript">
+	var websocket = null;
+	
+	var userId=$.cookie("userId");
+	
+	async function establishWebSocket(){
+
+	    if('WebSocket' in window){
+	        websocket = new WebSocket("ws://localhost:8080/websocket/"+ userId + "_web");
+	    }
+	    else{
+	        alert('Not support websocket')
+	    }
+	    
+	    await new Promise((resolve) =>{
+	    	websocket.onopen = function(e){
+	    		resolve(e.data);
+	    	};
+	    });
+	}
+	
+	establishWebSocket();
+
+    websocket.onerror = function(){
+        //setMessage("connect error");
+    };
+
+    websocket.onopen = function(event){
+        //setMessage("open");
+    }
+
+    websocket.onmessage = function(event){
+        setMessage(event.data);
+    }
+
+    websocket.onclose = function(){
+        //setMessage("close");
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+  
+    function setMessage(message){
+    	if(message.indexOf(";") != -1 && !isNaN(message.substr(0, 1))){
+    		var s =[];
+        	s = message.split(";");
+            var result = confirm(s[s.length-1]); 
+            websocket.send(message+";"+result);
+    	}else{
+    		alert(message);
+    	}
+    }
+
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+</script>
+</body>
+
+</html>

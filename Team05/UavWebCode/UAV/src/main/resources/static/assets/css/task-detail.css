@@ -1,0 +1,22 @@
+.members-content{
+	padding:18px; 
+	border-radius:6px;
+	border:solid 1px black;
+	height:240px;
+	overflow-y: scroll;
+}
+
+.member-info{
+	margin-bottom:20px;
+}
+
+.member-info p{
+	font-family: "Source Sans Pro", sans-serif;
+	color: black;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+}

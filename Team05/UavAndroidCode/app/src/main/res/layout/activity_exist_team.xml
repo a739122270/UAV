@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context="com.GRP.uav_android.ExistTeamPage.ExistTeamActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:background="@drawable/actionbar"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:background="@color/background"
+                android:src="@drawable/arrowl"/>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/t_name"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:layout_width="200dp"
+                    android:paddingRight="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Team Search"
+                    android:fontFamily="cursive"
+                    android:textColor="@color/titlecolor"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/search"/>
+
+        <EditText
+            android:id="@+id/edittext"
+            android:hint="SEARCH BY ID/NAME/OWNER"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:background="@null"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="146dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:gravity="center"
+                android:text="     DJI Matrice 200"
+                android:textColor="@color/titlecolor"
+                android:textColorHint="@color/background"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/arrowd"
+                />
+        </LinearLayout>
+
+       <RadioButton
+           android:layout_marginLeft="40dp"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:layout_gravity="center"
+           android:gravity="center"
+           android:textSize="16dp"
+           android:checked="true"
+           android:focusable="false"
+           android:text="Relevance"
+           android:textColor="@color/titlecolor"/>
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="4dp"
+        android:scrollbars="vertical" />
+
+</LinearLayout>
